@@ -15,3 +15,6 @@ wheels/
 /index_files/
 /_site/
 **/*.quarto_ipynb
+
+# Encuesta con nombres de participantes: datos personales, no se versiona
+data/encuesta-atdm.xlsx

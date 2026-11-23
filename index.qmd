@@ -32,6 +32,259 @@ format:
 Mientras la gente se acomoda: escanear para seguir estas diapositivas en su dispositivo.
 :::
 
+<!-- Bloque 0a · Encuesta previa: quiénes respondieron · 2 min -->
+
+## ¿Quiénes respondieron la encuesta?
+
+```{python}
+#| include: false
+# Encuesta previa a la charla. Todo se calcula al renderizar este documento:
+# si llegan más respuestas, basta con reemplazar el .xlsx y volver a renderizar.
+# El archivo trae nombres: NO se versiona (.gitignore) y aquí solo salen agregados.
+import re
+import textwrap
+import unicodedata
+
+import matplotlib.pyplot as plt
+import pandas as pd
+from IPython.display import Markdown
+
+enc = pd.read_excel("data/encuesta-atdm.xlsx")
+
+
+def columna(prefijo):
+    """Encuentra la columna cuyo encabezado empieza con `prefijo`."""
+    (col,) = [c for c in enc.columns if c.strip().startswith(prefijo)]
+    return col
+
+
+COL_ATDEM = columna("¿Eres Agente")
+PREGUNTAS = {"p1": columna("1."), "p2": columna("2.")}  # la 3 no se presenta
+
+
+def sin_acentos(texto):
+    texto = unicodedata.normalize("NFKD", str(texto))
+    return "".join(c for c in texto if not unicodedata.combining(c)).lower()
+
+
+# 1. Duplicados: misma persona registrada dos veces -> se queda su última respuesta
+enc["_clave"] = enc["nombre"].map(lambda n: " ".join(sin_acentos(n).split()))
+enc["_fecha"] = pd.to_datetime(enc["Fecha de Registro"], dayfirst=True)
+n_registros = len(enc)
+enc = enc.sort_values("_fecha").drop_duplicates("_clave", keep="last")
+n_duplicados = n_registros - len(enc)
+
+# 2. Sexo INFERIDO del primer nombre (no autodeclarado): regla del español
+#    "termina en -a -> mujer", con excepciones explícitas en ambos sentidos.
+MUJER_SIN_A = {
+    "abigail", "aide", "araceli", "areli", "arely", "beatriz", "belen", "carmen",
+    "citlali", "consuelo", "dolores", "edith", "esther", "evelyn", "guadalupe",
+    "ines", "ingrid", "isabel", "itzel", "ivette", "ivonne", "janeth", "jazmin",
+    "jocelyn", "judith", "karen", "leslie", "lisseth", "lizbeth", "lourdes", "luz",
+    "maribel", "marisol", "mercedes", "michelle", "miriam", "nancy", "nayeli",
+    "nicole", "noemi", "nohemi", "pilar", "raquel", "rocio", "rubi", "ruth",
+    "shaleny", "sharon", "sinahi", "soledad", "wendy", "xochitl", "yaneth", "yazmin",
+}
+HOMBRE_CON_A = {"bautista", "borja", "luca", "nicola"}
+
+
+def sexo_inferido(nombre):
+    primero = sin_acentos(nombre).split()[0]
+    if primero in MUJER_SIN_A:
+        return "Mujeres"
+    if primero in HOMBRE_CON_A:
+        return "Hombres"
+    return "Mujeres" if primero.endswith("a") else "Hombres"
+
+
+enc["sexo"] = enc["nombre"].map(sexo_inferido)
+enc["atdem"] = (
+    enc[COL_ATDEM].map(lambda r: sin_acentos(r).strip() if pd.notna(r) else r)
+    .map({"si": "Sí", "no": "No"})
+    .fillna("Sin respuesta")
+)
+
+
+# 3. Respuestas de opción múltiple ("B. …, C. …"): se toma el nivel MÁS AVANZADO
+def nivel_max(respuesta):
+    if pd.isna(respuesta):
+        return None
+    letras = re.findall(r"(?:^|,\s*)([A-E])\.\s", respuesta)
+    return max(letras) if letras else None
+
+
+for p, col in PREGUNTAS.items():
+    enc[p] = enc[col].map(nivel_max)
+
+# Grupos que se comparan en cada gráfica (de arriba hacia abajo)
+GRUPOS = [
+    ("Total", enc.index == enc.index),
+    ("Mujeres", enc["sexo"] == "Mujeres"),
+    ("Hombres", enc["sexo"] == "Hombres"),
+    (None, None),  # separador visual
+    ("Agentes ATDEM", enc["atdem"] == "Sí"),
+    ("No agentes", enc["atdem"] == "No"),
+]
+NIVELES = list("ABCDE")
+AZUL_TOTAL, AZUL_GRUPO = "#1f3a5f", "#5598e7"  # un solo tono: el color no codifica la opción
+TINTA, TENUE = "#1f1f1f", "#6c757d"
+
+
+def pct(serie):
+    return f"{100 * serie.mean():.0f}"
+
+
+def barras(p, etiquetas):
+    """Un panel por opción de respuesta, con el % de cada grupo que la eligió.
+    La opción se lee en el título de su panel: no hay leyenda de colores que descifrar.
+    Solo se dibujan las opciones que tienen etiqueta (A, B, ... en orden); los %
+    se calculan siempre sobre todas las respuestas del grupo."""
+    fig, axes = plt.subplots(1, len(etiquetas), figsize=(12, 3.9), sharey=True)
+    filas = [(nombre, filtro, -k) for k, (nombre, filtro) in enumerate(GRUPOS) if nombre]
+    for ax, nivel, etiqueta in zip(axes, NIVELES, etiquetas):
+        for nombre, filtro, y in filas:
+            resp = enc.loc[filtro, p].dropna()
+            valor = 100 * (resp == nivel).mean()
+            ax.barh(y, valor, height=0.62,
+                    color=AZUL_TOTAL if nombre == "Total" else AZUL_GRUPO)
+            ax.text(valor + 3, y, f"{valor:.0f} %", va="center", fontsize=12,
+                    color=TINTA if valor > 0 else TENUE)
+        ax.set_title(f"{nivel}. " + textwrap.fill(etiqueta, 17), fontsize=12.5,
+                     color=TINTA, loc="left", pad=10)
+        ax.set_xlim(0, 135)
+        ax.axvline(0, color="#bbbbbb", linewidth=1)
+        ax.tick_params(left=False, bottom=False, labelbottom=False)
+        for lado in ax.spines.values():
+            lado.set_visible(False)
+    ns = {nombre: len(enc.loc[filtro, p].dropna()) for nombre, filtro, _ in filas}
+    axes[0].set_yticks([y for *_, y in filas],
+                       [f"{nombre}  (n = {ns[nombre]})" for nombre, *_ in filas],
+                       fontsize=13, color=TINTA)
+    fig.tight_layout(w_pad=0.6)
+    plt.show()
+
+
+# Cifras para el texto de las diapositivas
+n_total = len(enc)
+n_mujeres = int((enc["sexo"] == "Mujeres").sum())
+n_hombres = int((enc["sexo"] == "Hombres").sum())
+n_agentes = int((enc["atdem"] == "Sí").sum())
+pct_agentes = pct(enc["atdem"] == "Sí")
+pct_ia_chat = pct(enc["p1"].dropna().isin(list("ABC")))
+pct_ia_agentes = pct(enc["p1"].dropna().isin(list("DE")))
+pct_no_conoce_quarto = pct(enc["p2"].dropna() == "A")
+```
+
+::: {.cards .tres}
+::: {.card}
+[`{python} n_total`]{.num style="width:auto; border-radius:8px; padding:0 0.4em;"}
+
+**personas respondieron**
+
+[`{python} n_mujeres` mujeres · `{python} n_hombres` hombres]{.desc}
+:::
+
+::: {.card}
+[`{python} pct_agentes` %]{.num style="width:auto; border-radius:8px; padding:0 0.4em;"}
+
+**son Agentes de Transformación Digital**
+
+[`{python} n_agentes` de `{python} n_total`]{.desc}
+:::
+
+::: {.card}
+[2]{.num}
+
+**preguntas en esta charla**
+
+[Conocimiento de Quarto · uso de IA en el trabajo con datos]{.desc}
+:::
+:::
+
+::: {.small}
+```{python}
+#| echo: false
+tabla = pd.crosstab(enc["sexo"], enc["atdem"], margins=True, margins_name="Total")
+tabla = tabla.reindex(
+    index=["Mujeres", "Hombres", "Total"],
+    columns=[c for c in ["Sí", "No", "Sin respuesta", "Total"] if c in tabla.columns],
+)
+tabla.index.name = None
+tabla.columns = [f"Agente ATDEM: {c}" if c in ("Sí", "No") else c for c in tabla.columns]
+Markdown(tabla.to_markdown(colalign=["left"] + ["center"] * tabla.shape[1]))
+```
+:::
+
+::: {.tiny}
+Sexo **inferido** a partir del primer nombre (no autodeclarado) · `{python} n_duplicados` registros duplicados eliminados (se conserva la última respuesta) ·
+calculado con Python al renderizar este mismo `index.qmd`: `uv run quarto render`.
+:::
+
+::: {.notes}
+Romper el hielo con sus propios datos: "esto lo contestaron ustedes". Remarcar que la
+diapositiva se generó con el mismo flujo que vamos a proponer: el .xlsx entra crudo,
+el código está en el .qmd y un render regenera todo. Si llegan más respuestas, se
+reemplaza el archivo y se vuelve a renderizar.
+Honestidad metodológica: el sexo se infirió del nombre con una regla explícita y
+versionada (termina en -a, con excepciones), no se preguntó. Es una aproximación.
+:::
+
+## ¿Conocen Quarto o herramientas similares?
+
+```{python}
+#| echo: false
+#| fig-align: center
+barras("p2", [
+    "No las conozco",
+    "Las conozco, nunca las he usado",
+    "He generado documentos sencillos",
+    "Produzco reportes automatizados",
+    # E. "Desarrollo proyectos reproducibles" no se muestra: nadie la eligió
+])
+```
+
+::: {.pregunta .small}
+El `{python} pct_no_conoce_quarto` % **no conoce** Quarto ni herramientas similares.
+:::
+
+::: {.tiny}
+Pregunta: "¿Has utilizado Quarto, R Markdown u otra herramienta para generar documentos reproducibles que integren texto, código y resultados?"
+:::
+
+::: {.notes}
+Ajustar el ritmo según este dato: si casi nadie conoce Quarto, detenerse más en las
+diapositivas de Markdown y Quarto, y menos en las de pruebas. Comparar mujeres/hombres
+y agentes/no agentes solo como descripción de la sala: los grupos son pequeños.
+:::
+
+## ¿Cómo usan hoy la IA en su trabajo con datos?
+
+```{python}
+#| echo: false
+#| fig-align: center
+barras("p1", [
+    "No la uso todavía",
+    "Chat de vez en cuando (copiar y pegar)",
+    "Chat frecuente, con contexto",
+    "Asistente en terminal o editor",
+    "Agentes autónomos, con validación",
+])
+```
+
+::: {.pregunta .small}
+El `{python} pct_ia_chat` % se queda en el **chat**; el `{python} pct_ia_agentes` % ya usa **asistentes o agentes**.
+:::
+
+::: {.tiny}
+Pregunta: "¿Cuál de estas opciones describe mejor la forma más avanzada en que usas herramientas de IA en tu trabajo con datos?" · Si se marcaron varias opciones, se toma la más avanzada.
+:::
+
+::: {.notes}
+Conecta directo con la siguiente diapositiva (tres niveles de uso de la IA): A-C es el
+nivel 1-2 (chat y app), D-E es el nivel 3 (agente en terminal). Transición: a más
+autonomía de la IA, más necesidad de estructura.
+:::
+
 ## Tres niveles de uso de la IA
 
 <!--
@@ -41,29 +294,32 @@ antes del primer ##, revealjs crea una diapositiva en blanco con él.
 VERSIÓN ATDEM (Agencia de Transformación Digital del Estado de Morelos).
 Plan de la adaptación: PLAN.md (el del webinar original: PLAN_webinar.md)
 
-GUION DE 45 MINUTOS (43.5 + 1.5 de colchón)
+GUION DE 45 MINUTOS (43.5 + 1.5 de colchón; la encuesta previa, +2 min, se come el colchón)
   Diap. 2   QR de las diapositivas (mientras la gente llega)
-  Bloque 0  Niveles de uso de IA + video del agente (3x) ... 3.5 min (diap. 3-4)
+  Bloque 0a Encuesta previa: quiénes respondieron ........ 2 min  (diap. 3-5)
+  Bloque 0  Niveles de uso de IA + video del agente (3x) ... 3.5 min (diap. 6-7)
   Bloque 1  Vibe coding: definición -> tuit -> Karpathy
-            -> pivote "así no se hace ciencia" ............ 4 min  (diap. 5-8, 11)
-  Bloque 1b La crisis de reproducibilidad: cifras y casos ... 3 min  (diap. 9-10)
-  Bloque 2  El desorden, dos niveles ...................... 3 min  (diap. 12-13)
-  Bloque 3  LA PROPUESTA + Markdown, Quarto y versionado ... 4 min  (diap. 14-18)
+            -> pivote "así no se hace ciencia" ............ 4 min  (diap. 8-11, 14)
+  Bloque 1b La crisis de reproducibilidad: cifras y casos ... 3 min  (diap. 12-13)
+  Bloque 2  El desorden, dos niveles ...................... 3 min  (diap. 15-16)
+  Bloque 3  LA PROPUESTA + Markdown, Quarto y versionado ... 4 min  (diap. 17-21)
   Bloque 4  Configuración (uv), estructura, fragmentación,
-            cultura digital ............................... 5 min  (diap. 19-22)
-  Bloque 5  Agentes: qué son, nube vs local ................ 3 min  (diap. 23-24)
-  Bloque 6  PLAN.md, diff y pruebas (DEMOS 1 y 2) .......... 7 min  (diap. 25-30)
-  Bloque 7  Spec-driven: del qmd al informe en línea ....... 2 min  (diap. 31-32)
-  Bloque 8  Tendencias: paquetes, MCP, wiki, commons ....... 2 min  (diap. 33)
-  Bloque 9  Una propuesta para la ATDEM .................... 4 min  (diap. 34-36)
-  Bloque 10 Cierre: human in the loop, preguntas, curso .... 3 min  (diap. 37-39)
+            cultura digital ............................... 5 min  (diap. 22-25)
+  Bloque 5  Agentes: qué son, nube vs local ................ 3 min  (diap. 26-27)
+  Bloque 6  PLAN.md, diff y pruebas (DEMOS 1 y 2) .......... 7 min  (diap. 28-33)
+  Bloque 7  Spec-driven: del qmd al informe en línea ....... 2 min  (diap. 34-35)
+  Bloque 8  Tendencias: paquetes, MCP, wiki, commons, SDV .. 2 min  (diap. 36)
+  Bloque 9  Una propuesta para la ATDEM .................... 4 min  (diap. 37-39)
+  Bloque 10 Cierre: human in the loop, preguntas, curso .... 3 min  (diap. 40-42)
 
   Desactivadas (comentadas en este archivo, no borradas): "Los síntomas",
   "Una narrativa, no una receta", "Quarto mantiene todo ordenado y auditable".
-  Fusibles si falta tiempo, en este orden: diap. 33 (tendencias, solo el remate)
-  -> video de la diap. 4 solo el primer minuto -> fusionar 9 y 10.
+  Fusibles si falta tiempo, en este orden: diap. 36 (tendencias, solo el remate)
+  -> video de la diap. 7 solo el primer minuto
+  -> encuesta: solo la diap. 3 y las cifras de las otras de palabra
+  -> fusionar 12 y 13.
 
-Video de la diap. 4: video/005-ejecuta-plan-3x.mp4 (1:16, sin audio), generado del
+Video de la diap. 7: video/005-ejecuta-plan-3x.mp4 (1:16, sin audio), generado del
 original propio (youtube.com/watch?v=RYGyi0F3SSE, 3:49) con:
   uvx yt-dlp ... && ffmpeg -vf "setpts=PTS/3,fps=30" -an -c:v libx264 -crf 26
 Se declara en _quarto.yml (resources: video/) para que se publique en gh-pages.
@@ -151,8 +407,16 @@ Describir en lenguaje natural lo que quieres, aceptar lo que el modelo escribe<b
 **sin leerlo**, y corregir por prueba y error hasta que "funciona".
 :::
 
+<br>
+
+::: {.small}
+**No es…** *"hazme un programa que haga un análisis de este archivo".*
+:::
+
 ::: {.notes}
 Abrir en frío con la definición operativa: primero se nombra la práctica, sin autor. El tuit y el currículum de quien la acuñó vienen enseguida para darle peso y acotarla.
+Aclarar el "No es…": pedirle código a un LLM no es vibe coding; lo que lo define es
+aceptar lo que escribe sin leerlo.
 :::
 
 ## Febrero de 2025: el tuit
@@ -833,6 +1097,7 @@ Diferencia clave con copiar/pegar desde el chat: el agente cierra el ciclo solo.
 - Los datos **no salen**; sin costo por token
 - Exige **hardware capaz**: aquí corre vía **MLX** en Apple Silicon con memoria unificada amplia (o GPU con VRAM suficiente)
 - Rinde menos que los modelos de frontera: hay que **evaluar sus capacidades** y si es **adecuado para la tarea** antes de adoptarlo
+- Para llegar al mismo resultado hay que trabajar más la **infraestructura** y el ***prompt***
 - **En gobierno:** datos personales y padrones, en **infraestructura del Estado**
 :::
 ::::
@@ -1176,7 +1441,7 @@ El salto respecto al flujo de siempre: el informe ya no es un Word o PDF que cir
 
 ## Tendencias actuales y a futuro
 
-::::::: {.cards}
+::::::: {.cards .tres style="font-size:0.85em;"}
 ::: {.card}
 [1]{.num}
 
@@ -1208,6 +1473,14 @@ El salto respecto al flujo de siempre: el informe ya no es un Word o PDF que cir
 
 [Usa primero **tu código validado**; cada respuesta lleva una etiqueta según su respaldo: 🟢 función validada · 🔵 contexto citado · 🟡 sin respaldo.]{.desc}
 :::
+
+::: {.card}
+[5]{.num}
+
+**Datos sintéticos** · [SDV, DataCebo](https://docs.sdv.dev/sdv) (`uv add sdv`)
+
+[Tablas **sintéticas** con la misma estructura estadística que las reales: se comparten, se prueban y se le dan al agente **sin exponer datos confidenciales**.]{.desc}
+:::
 :::::::
 
 ::: {.pregunta .small}
@@ -1216,6 +1489,7 @@ La misma dirección: código y conocimiento **verificados** que el agente usa en
 
 ::: {.notes}
 Paquetes: EnerHabitat, simulación de la transferencia de calor en envolventes, IER-UNAM. El mensaje no es "publiquen paquetes": la estructura de este flujo (src/ + tests/) deja el paquete casi listo, y sus versiones quedan fijadas en el uv.lock de quien lo usa. Orden de la diapositiva: de lo que ya existe y se usa (paquetes, MCP) a lo emergente (LLM Wiki, commons). commons (Posit): paquete de R y Python para "trustworthy data analysis agents"; corre sobre ellmer/chatlas/shinychat con cualquier proveedor de modelos. La versión de Python está en beta. Enlaza directo con lo de hoy: src/ con funciones probadas es exactamente el "código confiable" que commons pone primero, y la etiqueta amarilla es la versión automática de "no lo publiques sin prueba". MCP: modelcontextprotocol.io. Cierra el arco de Karpathy: la charla abrió con el Karpathy del vibe coding desechable y aquí aparece el Karpathy que estructura el conocimiento en Markdown versionado. Matiz honesto: la wiki la escribe el LLM, y los errores se acumulan si nadie la revisa; cada página cita su fuente cruda y la revisión entra por el diff, igual que el código. Es reproducibilidad del conocimiento, no del análisis: por eso va a futuro. ★ ATDEM: wiki de la normativa (Ley de Transformación Digital, lineamientos, plan semestral) para que los Agentes de Transformación Digital consulten con cita al artículo. Ejemplo vivo: el plan de esta charla salió de bajar la ley, pasarla a texto y citarla por artículo. Fusible: si falta tiempo, se dice solo el remate de abajo en 30 segundos.
+Datos sintéticos (SDV, Synthetic Data Vault): nació en el Data to AI Lab del MIT (2016) y hoy lo mantiene DataCebo. Entrena un modelo con la tabla real (GaussianCopula, CTGAN, etc.) y genera filas nuevas con las mismas distribuciones y relaciones, sin corresponder a personas reales; trae evaluación de calidad y de privacidad (SDMetrics). ★ ATDEM: los datos de las dependencias suelen tener datos personales; con una versión sintética se puede compartir el problema con proveedores, con la academia o con un agente en la nube sin que salgan los datos reales. Ejemplo en casa: la encuesta de esta charla trae nombres; no se versiona, pero una versión sintética sí podría publicarse. Matiz honesto: la licencia de SDV Community es Business Source License (código disponible, no open source OSI): revisar sus términos antes de usarla en producción. Y sintético no es anónimo por decreto: hay que medir el riesgo de re-identificación.
 :::
 
 <!-- Bloque 9 · Una propuesta para la ATDEM · 4 min -->
