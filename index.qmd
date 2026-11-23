@@ -74,7 +74,7 @@ n_registros = len(enc)
 enc = enc.sort_values("_fecha").drop_duplicates("_clave", keep="last")
 n_duplicados = n_registros - len(enc)
 
-# 2. Sexo INFERIDO del primer nombre (no autodeclarado): regla del español
+# 2. Género INFERIDO del primer nombre (no autodeclarado): regla del español
 #    "termina en -a -> mujer", con excepciones explícitas en ambos sentidos.
 MUJER_SIN_A = {
     "abigail", "aide", "araceli", "areli", "arely", "beatriz", "belen", "carmen",
@@ -88,7 +88,7 @@ MUJER_SIN_A = {
 HOMBRE_CON_A = {"bautista", "borja", "luca", "nicola"}
 
 
-def sexo_inferido(nombre):
+def genero_inferido(nombre):
     primero = sin_acentos(nombre).split()[0]
     if primero in MUJER_SIN_A:
         return "Mujeres"
@@ -97,7 +97,7 @@ def sexo_inferido(nombre):
     return "Mujeres" if primero.endswith("a") else "Hombres"
 
 
-enc["sexo"] = enc["nombre"].map(sexo_inferido)
+enc["genero"] = enc["nombre"].map(genero_inferido)
 enc["atdem"] = (
     enc[COL_ATDEM].map(lambda r: sin_acentos(r).strip() if pd.notna(r) else r)
     .map({"si": "Sí", "no": "No"})
@@ -119,8 +119,8 @@ for p, col in PREGUNTAS.items():
 # Grupos que se comparan en cada gráfica (de arriba hacia abajo)
 GRUPOS = [
     ("Total", enc.index == enc.index),
-    ("Mujeres", enc["sexo"] == "Mujeres"),
-    ("Hombres", enc["sexo"] == "Hombres"),
+    ("Mujeres", enc["genero"] == "Mujeres"),
+    ("Hombres", enc["genero"] == "Hombres"),
     (None, None),  # separador visual
     ("Agentes ATDEM", enc["atdem"] == "Sí"),
     ("No agentes", enc["atdem"] == "No"),
@@ -166,8 +166,8 @@ def barras(p, etiquetas):
 
 # Cifras para el texto de las diapositivas
 n_total = len(enc)
-n_mujeres = int((enc["sexo"] == "Mujeres").sum())
-n_hombres = int((enc["sexo"] == "Hombres").sum())
+n_mujeres = int((enc["genero"] == "Mujeres").sum())
+n_hombres = int((enc["genero"] == "Hombres").sum())
 n_agentes = int((enc["atdem"] == "Sí").sum())
 pct_agentes = pct(enc["atdem"] == "Sí")
 pct_ia_chat = pct(enc["p1"].dropna().isin(list("ABC")))
@@ -204,7 +204,7 @@ pct_no_conoce_quarto = pct(enc["p2"].dropna() == "A")
 ::: {.small}
 ```{python}
 #| echo: false
-tabla = pd.crosstab(enc["sexo"], enc["atdem"], margins=True, margins_name="Total")
+tabla = pd.crosstab(enc["genero"], enc["atdem"], margins=True, margins_name="Total")
 tabla = tabla.reindex(
     index=["Mujeres", "Hombres", "Total"],
     columns=[c for c in ["Sí", "No", "Sin respuesta", "Total"] if c in tabla.columns],
@@ -216,7 +216,7 @@ Markdown(tabla.to_markdown(colalign=["left"] + ["center"] * tabla.shape[1]))
 :::
 
 ::: {.tiny}
-Sexo **inferido** a partir del primer nombre (no autodeclarado) · `{python} n_duplicados` registros duplicados eliminados (se conserva la última respuesta) ·
+Mujeres y hombres según el nombre: **género inferido** del primer nombre (no autodeclarado) · `{python} n_duplicados` registros duplicados eliminados (se conserva la última respuesta) ·
 calculado con Python al renderizar este mismo `index.qmd`: `uv run quarto render`.
 :::
 
@@ -225,7 +225,7 @@ Romper el hielo con sus propios datos: "esto lo contestaron ustedes". Remarcar q
 diapositiva se generó con el mismo flujo que vamos a proponer: el .xlsx entra crudo,
 el código está en el .qmd y un render regenera todo. Si llegan más respuestas, se
 reemplaza el archivo y se vuelve a renderizar.
-Honestidad metodológica: el sexo se infirió del nombre con una regla explícita y
+Honestidad metodológica: el género se infirió del nombre con una regla explícita y
 versionada (termina en -a, con excepciones), no se preguntó. Es una aproximación.
 :::
 
