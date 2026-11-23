@@ -6,11 +6,11 @@
 <script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="index_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="index_files/libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="index_files/libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="index_files/libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.9.37">
+  <meta name="generator" content="quarto-1.8.26">
 
   <meta name="author" content="Guillermo Barrios del Valle · Instituto de Energías Renovables, UNAM">
   <title>Del vibe coding a la ciencia de datos reproducible</title>
@@ -20,9 +20,6 @@
   <link rel="stylesheet" href="index_files/libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="index_files/libs/revealjs/dist/reveal.css">
   <style>
-    /* Default styles provided by pandoc.
-    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
-    */
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -101,7 +98,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-a547655c7d3347e3f58d5578a08a4371.css">
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-87e9d2658287e0d56394d6b8e745ac15.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -231,6 +228,152 @@ Guillermo Barrios del Valle · Instituto de Energías Renovables, UNAM
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+<!-- Bloque 0a · Encuesta previa: quiénes respondieron · 2 min -->
+</section>
+<section id="quiénes-respondieron-la-encuesta" class="slide level2">
+<h2>¿Quiénes respondieron la encuesta?</h2>
+<div class="cards tres">
+<div class="card">
+<p><span class="num" style="width:auto; border-radius:8px; padding:0 0.4em;">49</span></p>
+<p><strong>personas respondieron</strong></p>
+<p><span class="desc">17 mujeres · 32 hombres</span></p>
+</div>
+<div class="card">
+<p><span class="num" style="width:auto; border-radius:8px; padding:0 0.4em;">47 %</span></p>
+<p><strong>son Agentes de Transformación Digital</strong></p>
+<p><span class="desc">23 de 49</span></p>
+</div>
+<div class="card">
+<p><span class="num">2</span></p>
+<p><strong>preguntas en esta charla</strong></p>
+<p><span class="desc">Conocimiento de Quarto · uso de IA en el trabajo con datos</span></p>
+</div>
+</div>
+<div class="small">
+<div id="2fe7318b" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="2">
+<table class="caption-top">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 26%">
+<col style="width: 26%">
+<col style="width: 22%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: center;">Agente ATDEM: Sí</th>
+<th style="text-align: center;">Agente ATDEM: No</th>
+<th style="text-align: center;">Sin respuesta</th>
+<th style="text-align: center;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Mujeres</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">17</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hombres</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">32</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Total</td>
+<td style="text-align: center;">23</td>
+<td style="text-align: center;">25</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">49</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="tiny">
+<p>Sexo <strong>inferido</strong> a partir del primer nombre (no autodeclarado) · 2 registros duplicados eliminados (se conserva la última respuesta) · calculado con Python al renderizar este mismo <code>index.qmd</code>: <code>uv run quarto render</code>.</p>
+</div>
+<aside class="notes">
+<p>Romper el hielo con sus propios datos: “esto lo contestaron ustedes”. Remarcar que la diapositiva se generó con el mismo flujo que vamos a proponer: el .xlsx entra crudo, el código está en el .qmd y un render regenera todo. Si llegan más respuestas, se reemplaza el archivo y se vuelve a renderizar. Honestidad metodológica: el sexo se infirió del nombre con una regla explícita y versionada (termina en -a, con excepciones), no se preguntó. Es una aproximación.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="conocen-quarto-o-herramientas-similares" class="slide level2">
+<h2>¿Conocen Quarto o herramientas similares?</h2>
+<div id="a63e0a02" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="index_files/figure-revealjs/cell-4-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="index_files/figure-revealjs/cell-4-output-1.png" class="quarto-figure quarto-figure-center" width="1148" height="364"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="pregunta small">
+<p>El 76 % <strong>no conoce</strong> Quarto ni herramientas similares.</p>
+</div>
+<div class="tiny">
+<p>Pregunta: “¿Has utilizado Quarto, R Markdown u otra herramienta para generar documentos reproducibles que integren texto, código y resultados?”</p>
+</div>
+<aside class="notes">
+<p>Ajustar el ritmo según este dato: si casi nadie conoce Quarto, detenerse más en las diapositivas de Markdown y Quarto, y menos en las de pruebas. Comparar mujeres/hombres y agentes/no agentes solo como descripción de la sala: los grupos son pequeños.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="cómo-usan-hoy-la-ia-en-su-trabajo-con-datos" class="slide level2">
+<h2>¿Cómo usan hoy la IA en su trabajo con datos?</h2>
+<div id="0c4a9578" class="cell" data-execution_count="4">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="index_files/figure-revealjs/cell-5-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="index_files/figure-revealjs/cell-5-output-1.png" class="quarto-figure quarto-figure-center" width="1148" height="363"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="pregunta small">
+<p>El 71 % se queda en el <strong>chat</strong>; el 29 % ya usa <strong>asistentes o agentes</strong>.</p>
+</div>
+<div class="tiny">
+<p>Pregunta: “¿Cuál de estas opciones describe mejor la forma más avanzada en que usas herramientas de IA en tu trabajo con datos?” · Si se marcaron varias opciones, se toma la más avanzada.</p>
+</div>
+<aside class="notes">
+<p>Conecta directo con la siguiente diapositiva (tres niveles de uso de la IA): A-C es el nivel 1-2 (chat y app), D-E es el nivel 3 (agente en terminal). Transición: a más autonomía de la IA, más necesidad de estructura.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="tres-niveles-de-uso-de-la-ia" class="slide level2">
 <h2>Tres niveles de uso de la IA</h2>
@@ -241,29 +384,32 @@ antes del primer ##, revealjs crea una diapositiva en blanco con él.
 VERSIÓN ATDEM (Agencia de Transformación Digital del Estado de Morelos).
 Plan de la adaptación: PLAN.md (el del webinar original: PLAN_webinar.md)
 
-GUION DE 45 MINUTOS (43.5 + 1.5 de colchón)
+GUION DE 45 MINUTOS (43.5 + 1.5 de colchón; la encuesta previa, +2 min, se come el colchón)
   Diap. 2   QR de las diapositivas (mientras la gente llega)
-  Bloque 0  Niveles de uso de IA + video del agente (3x) ... 3.5 min (diap. 3-4)
+  Bloque 0a Encuesta previa: quiénes respondieron ........ 2 min  (diap. 3-5)
+  Bloque 0  Niveles de uso de IA + video del agente (3x) ... 3.5 min (diap. 6-7)
   Bloque 1  Vibe coding: definición -> tuit -> Karpathy
-            -> pivote "así no se hace ciencia" ............ 4 min  (diap. 5-8, 11)
-  Bloque 1b La crisis de reproducibilidad: cifras y casos ... 3 min  (diap. 9-10)
-  Bloque 2  El desorden, dos niveles ...................... 3 min  (diap. 12-13)
-  Bloque 3  LA PROPUESTA + Markdown, Quarto y versionado ... 4 min  (diap. 14-18)
+            -> pivote "así no se hace ciencia" ............ 4 min  (diap. 8-11, 14)
+  Bloque 1b La crisis de reproducibilidad: cifras y casos ... 3 min  (diap. 12-13)
+  Bloque 2  El desorden, dos niveles ...................... 3 min  (diap. 15-16)
+  Bloque 3  LA PROPUESTA + Markdown, Quarto y versionado ... 4 min  (diap. 17-21)
   Bloque 4  Configuración (uv), estructura, fragmentación,
-            cultura digital ............................... 5 min  (diap. 19-22)
-  Bloque 5  Agentes: qué son, nube vs local ................ 3 min  (diap. 23-24)
-  Bloque 6  PLAN.md, diff y pruebas (DEMOS 1 y 2) .......... 7 min  (diap. 25-30)
-  Bloque 7  Spec-driven: del qmd al informe en línea ....... 2 min  (diap. 31-32)
-  Bloque 8  Tendencias: paquetes, MCP, wiki, commons ....... 2 min  (diap. 33)
-  Bloque 9  Una propuesta para la ATDEM .................... 4 min  (diap. 34-36)
-  Bloque 10 Cierre: human in the loop, preguntas, curso .... 3 min  (diap. 37-39)
+            cultura digital ............................... 5 min  (diap. 22-25)
+  Bloque 5  Agentes: qué son, nube vs local ................ 3 min  (diap. 26-27)
+  Bloque 6  PLAN.md, diff y pruebas (DEMOS 1 y 2) .......... 7 min  (diap. 28-33)
+  Bloque 7  Spec-driven: del qmd al informe en línea ....... 2 min  (diap. 34-35)
+  Bloque 8  Tendencias: paquetes, MCP, wiki, commons, SDV .. 2 min  (diap. 36)
+  Bloque 9  Una propuesta para la ATDEM .................... 4 min  (diap. 37-39)
+  Bloque 10 Cierre: human in the loop, preguntas, curso .... 3 min  (diap. 40-42)
 
   Desactivadas (comentadas en este archivo, no borradas): "Los síntomas",
   "Una narrativa, no una receta", "Quarto mantiene todo ordenado y auditable".
-  Fusibles si falta tiempo, en este orden: diap. 33 (tendencias, solo el remate)
-  -> video de la diap. 4 solo el primer minuto -> fusionar 9 y 10.
+  Fusibles si falta tiempo, en este orden: diap. 36 (tendencias, solo el remate)
+  -> video de la diap. 7 solo el primer minuto
+  -> encuesta: solo la diap. 3 y las cifras de las otras de palabra
+  -> fusionar 12 y 13.
 
-Video de la diap. 4: video/005-ejecuta-plan-3x.mp4 (1:16, sin audio), generado del
+Video de la diap. 7: video/005-ejecuta-plan-3x.mp4 (1:16, sin audio), generado del
 original propio (youtube.com/watch?v=RYGyi0F3SSE, 3:49) con:
   uvx yt-dlp ... && ffmpeg -vf "setpts=PTS/3,fps=30" -an -c:v libx264 -crf 26
 Se declara en _quarto.yml (resources: video/) para que se publique en gh-pages.
@@ -287,17 +433,17 @@ de las diapositivas (reales: ~/paper_enerhabitat).
 <div class="card">
 <p><span class="num">1</span></p>
 <p><strong>Chat web</strong></p>
-<p><span class="desc">ChatGPT, Claude.ai, Gemini. Copiar y pegar código y datos; el contexto se pierde al cerrar la pestaña.<br><br><strong>¿Queda registro?</strong> No.</span></p>
+<p><span class="desc">ChatGPT, Claude.ai, Gemini. Copiar y pegar código y datos; el contexto se pierde al cerrar la pestaña.<br> <br> <strong>¿Queda registro?</strong> No.</span></p>
 </div>
 <div class="card">
 <p><span class="num">2</span></p>
 <p><strong>App de escritorio</strong></p>
-<p><span class="desc">Claude Desktop y similares. Proyectos, archivos y conectores: más contexto, pero el trabajo vive en la app.<br><br><strong>¿Queda registro?</strong> Parcial.</span></p>
+<p><span class="desc">Claude Desktop y similares. Proyectos, archivos y conectores: más contexto, pero el trabajo vive en la app.<br> <br> <strong>¿Queda registro?</strong> Parcial.</span></p>
 </div>
 <div class="card">
 <p><span class="num">3</span></p>
 <p><strong>Agente en terminal</strong></p>
-<p><span class="desc">Claude Code (CLI). Lee, escribe y <strong>ejecuta</strong> en tu repositorio: corre código, ve errores, se corrige.<br><br><strong>¿Queda registro?</strong> Sí, <strong>si hay estructura</strong>: todo en git.</span></p>
+<p><span class="desc">Claude Code (CLI). Lee, escribe y <strong>ejecuta</strong> en tu repositorio: corre código, ve errores, se corrige.<br> <br> <strong>¿Queda registro?</strong> Sí, <strong>si hay estructura</strong>: todo en git.</span></p>
 </div>
 </div>
 <div class="vs-mal" style="margin-top:0.7em;">
@@ -323,8 +469,8 @@ de las diapositivas (reales: ~/paper_enerhabitat).
 <section id="un-agente-siguiendo-un-contrato" class="slide level2 center">
 <h2>Un agente siguiendo un contrato</h2>
 <div style="text-align: center;">
-<video data-autoplay="" muted="" controls="" playsinline="" preload="auto" style="height: 500px; max-width: 100%; border-radius: 8px;">
-  <source src="video/005-ejecuta-plan-3x.mp4" type="video/mp4">
+<video controls="" data-autoplay="" muted="" playsinline="" preload="auto" style="height: 500px; max-width: 100%; border-radius: 8px;">
+<source src="video/005-ejecuta-plan-3x.mp4" type="video/mp4">
 </video>
 <div class="tiny">
 <p>Claude Code ejecutando un <code>PLAN.md</code> sección por sección, en modo automático · video acelerado <strong>3x</strong>, sin audio · <a href="https://www.youtube.com/watch?v=RYGyi0F3SSE">original en YouTube</a></p>
@@ -349,8 +495,12 @@ de las diapositivas (reales: ~/paper_enerhabitat).
 <div class="pregunta small">
 <p>Describir en lenguaje natural lo que quieres, aceptar lo que el modelo escribe<br> <strong>sin leerlo</strong>, y corregir por prueba y error hasta que “funciona”.</p>
 </div>
+<p><br></p>
+<div class="small">
+<p><strong>No es…</strong> <em>“hazme un programa que haga un análisis de este archivo”.</em></p>
+</div>
 <aside class="notes">
-<p>Abrir en frío con la definición operativa: primero se nombra la práctica, sin autor. El tuit y el currículum de quien la acuñó vienen enseguida para darle peso y acotarla.</p>
+<p>Abrir en frío con la definición operativa: primero se nombra la práctica, sin autor. El tuit y el currículum de quien la acuñó vienen enseguida para darle peso y acotarla. Aclarar el “No es…”: pedirle código a un LLM no es vibe coding; lo que lo define es aceptar lo que escribe sin leerlo.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -367,7 +517,7 @@ de las diapositivas (reales: ~/paper_enerhabitat).
 <h2>Febrero de 2025: el tuit</h2>
 <div class="columns">
 <div class="column" style="width:55%;">
-<p><a href="img/karpathy-tweet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/karpathy-tweet.png" style="width:100.0%"></a></p>
+<p><a href="img/karpathy-tweet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/karpathy-tweet.png" style="width:100.0%"></a></p>
 <div class="tiny">
 <p>Captura del embed oficial de X, <span class="citation" data-cites="karpathy">@karpathy</span>, 2 de febrero de 2025. El embed recorta el texto; <a href="https://x.com/karpathy/status/1886192184808149383">la publicación completa está aquí</a>.</p>
 </div>
@@ -403,7 +553,7 @@ de las diapositivas (reales: ~/paper_enerhabitat).
 <h2>¿Quién es Andrej Karpathy?</h2>
 <div class="columns">
 <div class="column" style="width:35%;">
-<p><a href="img/karpathy.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/karpathy.png" height="400"></a></p>
+<p><a href="img/karpathy.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/karpathy.png" height="400"></a></p>
 <div class="tiny">
 <p>Foto: Gladwin Analytics, 2019, vía Wikimedia Commons, CC BY 3.0.</p>
 </div>
@@ -461,17 +611,17 @@ de las diapositivas (reales: ~/paper_enerhabitat).
 <div class="card">
 <p><span class="num" style="width:auto; border-radius:8px; padding:0 0.4em;">&gt;70 %</span></p>
 <p><strong>de 1 576 investigadores</strong></p>
-<p><span class="desc">no logró reproducir el experimento de un colega; más de la mitad, ni el <strong>propio</strong>.<br><span class="tiny">Baker, <em>Nature</em>, 2016</span></span></p>
+<p><span class="desc">no logró reproducir el experimento de un colega; más de la mitad, ni el <strong>propio</strong>.<br> <span class="tiny">Baker, <em>Nature</em>, 2016</span></span></p>
 </div>
 <div class="card">
 <p><span class="num" style="width:auto; border-radius:8px; padding:0 0.4em;">4 %</span></p>
 <p><strong>de 1.4 M notebooks de Jupyter</strong></p>
-<p><span class="desc">en GitHub dio el mismo resultado al re-ejecutarse; solo el <strong>24 %</strong> corrió sin error.<br><span class="tiny">Pimentel et al., MSR 2019</span></span></p>
+<p><span class="desc">en GitHub dio el mismo resultado al re-ejecutarse; solo el <strong>24 %</strong> corrió sin error.<br> <span class="tiny">Pimentel et al., MSR 2019</span></span></p>
 </div>
 <div class="card">
 <p><span class="num" style="width:auto; border-radius:8px; padding:0 0.4em;">74 %</span></p>
 <p><strong>de los scripts de R</strong></p>
-<p><span class="desc">depositados en Harvard Dataverse falló al re-ejecutarse (56 % tras limpieza automática).<br><span class="tiny">Trisovic et al., <em>Sci. Data</em>, 2022</span></span></p>
+<p><span class="desc">depositados en Harvard Dataverse falló al re-ejecutarse (56 % tras limpieza automática).<br> <span class="tiny">Trisovic et al., <em>Sci. Data</em>, 2022</span></span></p>
 </div>
 </div>
 <p><br></p>
@@ -822,7 +972,7 @@ texto plano con marcas (Markdown) y documentos que ejecutan su propio código (Q
 <h2>¿Qué es el versionado?</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
-<p><a href="img/meme-versiones-tesis.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/meme-versiones-tesis.png" height="460"></a></p>
+<p><a href="img/meme-versiones-tesis.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/meme-versiones-tesis.png" height="460"></a></p>
 </div><div class="column small" style="width:60%;">
 <ul>
 <li>Todos hemos versionado <strong>a mano</strong>: <code>tesis_final_por_fin_eso_espero.docx</code>, <code>informe_trimestral_final_v3.xlsx</code>.</li>
@@ -1085,6 +1235,7 @@ datos + código  ──►  grafica_v2_FINAL.png  ──►  por correo  ──�
 <li>Los datos <strong>no salen</strong>; sin costo por token</li>
 <li>Exige <strong>hardware capaz</strong>: aquí corre vía <strong>MLX</strong> en Apple Silicon con memoria unificada amplia (o GPU con VRAM suficiente)</li>
 <li>Rinde menos que los modelos de frontera: hay que <strong>evaluar sus capacidades</strong> y si es <strong>adecuado para la tarea</strong> antes de adoptarlo</li>
+<li>Para llegar al mismo resultado hay que trabajar más la <strong>infraestructura</strong> y el <strong><em>prompt</em></strong></li>
 <li><strong>En gobierno:</strong> datos personales y padrones, en <strong>infraestructura del Estado</strong></li>
 </ul>
 </div>
@@ -1449,7 +1600,7 @@ No hay celdas ocultas ni estados de notebook fuera de orden.
 </section>
 <section id="tendencias-actuales-y-a-futuro" class="slide level2">
 <h2>Tendencias actuales y a futuro</h2>
-<div class="cards">
+<div class="cards tres" style="font-size:0.85em;">
 <div class="card">
 <p><span class="num">1</span></p>
 <p><strong>Paquetes instalables</strong> · <a href="https://pypi.org/project/enerhabitat/">EnerHabitat en PyPI</a> (<code>uv add enerhabitat</code>)</p>
@@ -1470,12 +1621,17 @@ No hay celdas ocultas ni estados de notebook fuera de orden.
 <p><strong>Agentes de análisis confiables</strong> · <a href="https://posit-dev.github.io/commons/">commons, Posit</a></p>
 <p><span class="desc">Usa primero <strong>tu código validado</strong>; cada respuesta lleva una etiqueta según su respaldo: 🟢 función validada · 🔵 contexto citado · 🟡 sin respaldo.</span></p>
 </div>
+<div class="card">
+<p><span class="num">5</span></p>
+<p><strong>Datos sintéticos</strong> · <a href="https://docs.sdv.dev/sdv">SDV, DataCebo</a> (<code>uv add sdv</code>)</p>
+<p><span class="desc">Tablas <strong>sintéticas</strong> con la misma estructura estadística que las reales: se comparten, se prueban y se le dan al agente <strong>sin exponer datos confidenciales</strong>.</span></p>
+</div>
 </div>
 <div class="pregunta small">
 <p>La misma dirección: código y conocimiento <strong>verificados</strong> que el agente usa en vez de improvisar.</p>
 </div>
 <aside class="notes">
-<p>Paquetes: EnerHabitat, simulación de la transferencia de calor en envolventes, IER-UNAM. El mensaje no es “publiquen paquetes”: la estructura de este flujo (src/ + tests/) deja el paquete casi listo, y sus versiones quedan fijadas en el uv.lock de quien lo usa. Orden de la diapositiva: de lo que ya existe y se usa (paquetes, MCP) a lo emergente (LLM Wiki, commons). commons (Posit): paquete de R y Python para “trustworthy data analysis agents”; corre sobre ellmer/chatlas/shinychat con cualquier proveedor de modelos. La versión de Python está en beta. Enlaza directo con lo de hoy: src/ con funciones probadas es exactamente el “código confiable” que commons pone primero, y la etiqueta amarilla es la versión automática de “no lo publiques sin prueba”. MCP: modelcontextprotocol.io. Cierra el arco de Karpathy: la charla abrió con el Karpathy del vibe coding desechable y aquí aparece el Karpathy que estructura el conocimiento en Markdown versionado. Matiz honesto: la wiki la escribe el LLM, y los errores se acumulan si nadie la revisa; cada página cita su fuente cruda y la revisión entra por el diff, igual que el código. Es reproducibilidad del conocimiento, no del análisis: por eso va a futuro. ★ ATDEM: wiki de la normativa (Ley de Transformación Digital, lineamientos, plan semestral) para que los Agentes de Transformación Digital consulten con cita al artículo. Ejemplo vivo: el plan de esta charla salió de bajar la ley, pasarla a texto y citarla por artículo. Fusible: si falta tiempo, se dice solo el remate de abajo en 30 segundos.</p>
+<p>Paquetes: EnerHabitat, simulación de la transferencia de calor en envolventes, IER-UNAM. El mensaje no es “publiquen paquetes”: la estructura de este flujo (src/ + tests/) deja el paquete casi listo, y sus versiones quedan fijadas en el uv.lock de quien lo usa. Orden de la diapositiva: de lo que ya existe y se usa (paquetes, MCP) a lo emergente (LLM Wiki, commons). commons (Posit): paquete de R y Python para “trustworthy data analysis agents”; corre sobre ellmer/chatlas/shinychat con cualquier proveedor de modelos. La versión de Python está en beta. Enlaza directo con lo de hoy: src/ con funciones probadas es exactamente el “código confiable” que commons pone primero, y la etiqueta amarilla es la versión automática de “no lo publiques sin prueba”. MCP: modelcontextprotocol.io. Cierra el arco de Karpathy: la charla abrió con el Karpathy del vibe coding desechable y aquí aparece el Karpathy que estructura el conocimiento en Markdown versionado. Matiz honesto: la wiki la escribe el LLM, y los errores se acumulan si nadie la revisa; cada página cita su fuente cruda y la revisión entra por el diff, igual que el código. Es reproducibilidad del conocimiento, no del análisis: por eso va a futuro. ★ ATDEM: wiki de la normativa (Ley de Transformación Digital, lineamientos, plan semestral) para que los Agentes de Transformación Digital consulten con cita al artículo. Ejemplo vivo: el plan de esta charla salió de bajar la ley, pasarla a texto y citarla por artículo. Fusible: si falta tiempo, se dice solo el remate de abajo en 30 segundos. Datos sintéticos (SDV, Synthetic Data Vault): nació en el Data to AI Lab del MIT (2016) y hoy lo mantiene DataCebo. Entrena un modelo con la tabla real (GaussianCopula, CTGAN, etc.) y genera filas nuevas con las mismas distribuciones y relaciones, sin corresponder a personas reales; trae evaluación de calidad y de privacidad (SDMetrics). ★ ATDEM: los datos de las dependencias suelen tener datos personales; con una versión sintética se puede compartir el problema con proveedores, con la academia o con un agente en la nube sin que salgan los datos reales. Ejemplo en casa: la encuesta de esta charla trae nombres; no se versiona, pero una versión sintética sí podría publicarse. Matiz honesto: la licencia de SDV Community es Business Source License (código disponible, no open source OSI): revisar sus términos antes de usarla en producción. Y sintético no es anónimo por decreto: hay que medir el riesgo de re-identificación.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1655,7 +1811,7 @@ No hay celdas ocultas ni estados de notebook fuera de orden.
 <section id="formación-para-agentes-de-transformación-digital" class="slide level2">
 <h2>Formación para Agentes de Transformación Digital</h2>
 <div class="pregunta small">
-<p><strong>De la terminal al informe:<br>ciencia de datos reproducible con Python, Quarto y agentes de IA</strong></p>
+<p><strong>De la terminal al informe:<br> ciencia de datos reproducible con Python, Quarto y agentes de IA</strong></p>
 </div>
 <div class="columns small">
 <div class="column" style="width:50%;">
