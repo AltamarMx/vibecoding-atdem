@@ -250,7 +250,7 @@ Guillermo Barrios del Valle · Instituto de Energías Renovables, UNAM
 </div>
 </div>
 <div class="small">
-<div id="d686baaf" class="cell" data-execution_count="2">
+<div id="db910ed8" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display cell-output-markdown" data-execution_count="2">
 <table class="caption-top">
 <colgroup>
@@ -315,7 +315,7 @@ Guillermo Barrios del Valle · Instituto de Energías Renovables, UNAM
 </section>
 <section id="conocen-quarto-o-herramientas-similares" class="slide level2">
 <h2>¿Conocen Quarto o herramientas similares?</h2>
-<div id="4e320166" class="cell" data-execution_count="3">
+<div id="b55a15e5" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -346,7 +346,7 @@ Guillermo Barrios del Valle · Instituto de Energías Renovables, UNAM
 </section>
 <section id="cómo-usan-hoy-la-ia-en-su-trabajo-con-datos" class="slide level2">
 <h2>¿Cómo usan hoy la IA en su trabajo con datos?</h2>
-<div id="cb1bd1ce" class="cell" data-execution_count="4">
+<div id="9a531aa6" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -384,7 +384,7 @@ antes del primer ##, revealjs crea una diapositiva en blanco con él.
 VERSIÓN ATDEM (Agencia de Transformación Digital del Estado de Morelos).
 Plan de la adaptación: PLAN.md (el del webinar original: PLAN_webinar.md)
 
-GUION DE 45 MINUTOS (43.5 + 1.5 de colchón; la encuesta previa, +2 min, se come el colchón)
+GUION DE 45 MINUTOS (43.5 + 1.5 de colchón; la encuesta previa (+2 min) y el caso UNAM (+1 min) exceden el colchón por 1.5 min)
   Diap. 2   QR de las diapositivas (mientras la gente llega)
   Bloque 0a Encuesta previa: quiénes respondieron ........ 2 min  (diap. 3-5)
   Bloque 0  Niveles de uso de IA + video del agente (3x) ... 3.5 min (diap. 6-7)
@@ -397,14 +397,15 @@ GUION DE 45 MINUTOS (43.5 + 1.5 de colchón; la encuesta previa, +2 min, se come
             cultura digital ............................... 5 min  (diap. 22-25)
   Bloque 5  Agentes: qué son, nube vs local ................ 3 min  (diap. 26-27)
   Bloque 6  PLAN.md, diff y pruebas (DEMOS 1 y 2) .......... 7 min  (diap. 28-33)
-  Bloque 7  Spec-driven: del qmd al informe en línea ....... 2 min  (diap. 34-35)
-  Bloque 8  Tendencias: paquetes, MCP, wiki, commons, SDV .. 2 min  (diap. 36)
-  Bloque 9  Una propuesta para la ATDEM .................... 4 min  (diap. 37-39)
-  Bloque 10 Cierre: human in the loop, preguntas, curso .... 3 min  (diap. 40-42)
+  Bloque 7  Spec-driven: del qmd al informe en línea,
+            datos abiertos (caso UNAM) .................... 3 min  (diap. 34-36)
+  Bloque 8  Tendencias: paquetes, MCP, wiki, commons, SDV .. 2 min  (diap. 37)
+  Bloque 9  Una propuesta para la ATDEM .................... 4 min  (diap. 38-40)
+  Bloque 10 Cierre: human in the loop, preguntas, curso .... 3 min  (diap. 41-43)
 
   Desactivadas (comentadas en este archivo, no borradas): "Los síntomas",
   "Una narrativa, no una receta", "Quarto mantiene todo ordenado y auditable".
-  Fusibles si falta tiempo, en este orden: diap. 36 (tendencias, solo el remate)
+  Fusibles si falta tiempo, en este orden: diap. 37 (tendencias, solo el remate)
   -> video de la diap. 7 solo el primer minuto
   -> encuesta: solo la diap. 3 y las cifras de las otras de palabra
   -> fusionar 12 y 13.
@@ -496,8 +497,20 @@ de las diapositivas (reales: ~/paper_enerhabitat).
 <p>Describir en lenguaje natural lo que quieres, aceptar lo que el modelo escribe<br> <strong>sin leerlo</strong>, y corregir por prueba y error hasta que “funciona”.</p>
 </div>
 <p><br></p>
-<div class="small">
-<p><strong>No es…</strong> <em>“hazme un programa que haga un análisis de este archivo”.</em></p>
+<div title="No es…">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>No es…</strong></p>
+</div>
+<div class="callout-content">
+<p><em>“Hazme un programa que haga un análisis de este archivo”.</em></p>
+</div>
+</div>
+</div>
 </div>
 <aside class="notes">
 <p>Abrir en frío con la definición operativa: primero se nombra la práctica, sin autor. El tuit y el currículum de quien la acuñó vienen enseguida para darle peso y acotarla. Aclarar el “No es…”: pedirle código a un LLM no es vibe coding; lo que lo define es aceptar lo que escribe sin leerlo.</p>
@@ -1585,6 +1598,39 @@ No hay celdas ocultas ni estados de notebook fuera de orden.
 </div>
 <aside class="notes">
 <p>El salto respecto al flujo de siempre: el informe ya no es un Word o PDF que circula por correo, es una página con URL, versionada y regenerable. La tabla del informe y el CSV del portal salen de la misma celda: no pueden contradecirse. Si alguien pide Word para el oficio: <code>quarto render --to docx</code> desde el mismo .qmd; se dice de palabra solo si preguntan. Cierra el ciclo completo: dato crudo → análisis → tabla → informe HTML + CSV.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="datos-abiertos-otros-ojos-ven-lo-que-tú-no" class="slide level2">
+<h2>Datos abiertos: otros ojos ven lo que tú no</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><a href="img/unam-aciertos-medicina-2025-2026.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/unam-aciertos-medicina-2025-2026.jpeg" style="width:100.0%"></a></p>
+<div class="tiny">
+<p>Distribución de aciertos para Medicina en CU, 2025 vs 2026. Gráfica: Luis Ángel Maciel Barón, publicada en <a href="https://www.milenio.com/comunidad/irregularidades-examen-unam-2026-estadisticas-sobre-aciertos">Milenio</a> (28 de julio de 2026).</p>
+</div>
+</div><div class="column small" style="width:40%;">
+<ul>
+<li>2026: primer examen de admisión a la UNAM <strong>en línea</strong>.</li>
+<li>Con los resultados <strong>publicados</strong>, personas <strong>ajenas a la UNAM</strong> compararon la distribución de aciertos con la de años anteriores.</li>
+<li>Medicina CU: puntajes de 100 o más pasaron de <strong>8.9&nbsp;%</strong> a <strong>29&nbsp;%</strong>.</li>
+<li>La UNAM confirmó irregularidades, <strong>anuló cerca del 2&nbsp;%</strong> de los exámenes y presentó una denuncia; las causas siguen en revisión.</li>
+</ul>
+</div></div>
+<div class="pregunta small">
+<p>Publicar los datos no es exponerse: es <strong>sumar revisores</strong>.</p>
+</div>
+<aside class="notes">
+<p>Encuadre: no es “la UNAM falló”, es “los datos estaban publicados y por eso alguien pudo verlo”. Los resultados de la DGAE son públicos; con ellos, analistas externos (Helios en X, Luis Ángel Maciel Barón) compararon contra 2021-2025: el promedio de Médico Cirujano en CU habría pasado de 59-62 a 78 aciertos; Derecho y Arquitectura también subieron (Publimetro, Xataka, Milenio, julio de 2026). La UNAM confirmó irregularidades (suplantación de identidad), anuló cerca del 2 % de unos 158 mil exámenes, presentó denuncia y el rector ordenó un informe (Expansión, 31 jul 2026; Milenio). Matiz honesto, y es parte de la lección: la distribución sola no prueba fraude; el propio analista lo dijo (menos ansiedad, condiciones en casa, dificultad distinta). Separar el patrón de la causa: el dato abierto abre la pregunta; la conclusión exige análisis completo y reproducible. ★ ATDEM: el Portal de Datos Abiertos no es solo cumplimiento; es verificación externa gratuita. Verificar si ya se publicaron las conclusiones de la comisión técnica antes de la charla.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
