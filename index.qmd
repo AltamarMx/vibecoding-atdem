@@ -1,8 +1,8 @@
 ---
-title: "Del vibe coding a la ciencia reproducible"
-subtitle: "Markdown, Quarto y pruebas para una investigación transparente"
+title: "Del vibe coding a la ciencia de datos reproducible"
+subtitle: "Niveles de uso de IA, Markdown, Quarto y pruebas para un gobierno de datos auditable · Agencia de Transformación Digital del Estado de Morelos"
 author: "Guillermo Barrios del Valle · Instituto de Energías Renovables, UNAM"
-date: 2026-10-16
+date: 2026-10-31
 date-format: "D [de] MMMM [de] YYYY"
 lang: es
 format:
@@ -12,7 +12,7 @@ format:
     slide-number: c/t
     hash: true
     transition: fade
-    footer: "Del vibe coding a la ciencia reproducible · IER-UNAM"
+    footer: "Del vibe coding a la ciencia de datos reproducible · ATDEM · IER-UNAM"
     center-title-slide: true
     code-line-numbers: false
     width: 1280
@@ -23,37 +23,50 @@ format:
 ## {.center}
 
 ::: {style="text-align: center;"}
-![](img/qrvibecoding.png){height="600px"}
+![](img/qr-atdem.png){height="600"}
 
-[altamarmx.github.io/vibecoding-reproducible]{.tiny}
+[altamarmx.github.io/vibecoding-atdem]{.tiny}
 :::
 
 ::: {.notes}
 Mientras la gente se acomoda: escanear para seguir estas diapositivas en su dispositivo.
 :::
 
-## ¿Qué es el vibe coding? {.center}
+## Tres niveles de uso de la IA
 
 <!--
 OJO: este comentario va DENTRO de la segunda diapositiva de contenido. Si se coloca
 antes del primer ##, revealjs crea una diapositiva en blanco con él.
 
-GUION DE 40 MINUTOS (36 + 4 de colchón)
+VERSIÓN ATDEM (Agencia de Transformación Digital del Estado de Morelos).
+Plan de la adaptación: PLAN.md (el del webinar original: PLAN_webinar.md)
+
+GUION DE 45 MINUTOS (43.5 + 1.5 de colchón)
   Diap. 2   QR de las diapositivas (mientras la gente llega)
+  Bloque 0  Niveles de uso de IA + video del agente (3x) ... 3.5 min (diap. 3-4)
   Bloque 1  Vibe coding: definición -> tuit -> Karpathy
-            -> pivote "así no se hace ciencia" ............ 4 min  (diap. 3-7)
-  Bloque 2  El desorden, dos niveles ...................... 3 min  (diap. 8-9)
-  Bloque 3  LA PROPUESTA + Markdown, Quarto y versionado ... 4 min  (diap. 10-14)
-  Bloque 4  Configuración (uv), estructura, fragmentación .. 5 min  (diap. 15-17)
-  Bloque 5  Agentes: qué son, nube vs local ................ 4 min  (diap. 18-19)
-  Bloque 6  PLAN.md, diff y pruebas (DEMOS 1 y 2) .......... 7 min  (diap. 20-25)
-  Bloque 7  Spec-driven: de Quarto al artículo (DEMO 3) .... 4 min  (diap. 26-27)
-  Bloque 8  Paquetes y MCP ................................. 3 min  (diap. 28-29)
-  Bloque 9  Cierre: human in the loop, preguntas, curso .... 2 min  (diap. 30-32)
+            -> pivote "así no se hace ciencia" ............ 4 min  (diap. 5-8, 11)
+  Bloque 1b La crisis de reproducibilidad: cifras y casos ... 3 min  (diap. 9-10)
+  Bloque 2  El desorden, dos niveles ...................... 3 min  (diap. 12-13)
+  Bloque 3  LA PROPUESTA + Markdown, Quarto y versionado ... 4 min  (diap. 14-18)
+  Bloque 4  Configuración (uv), estructura, fragmentación,
+            cultura digital ............................... 5 min  (diap. 19-22)
+  Bloque 5  Agentes: qué son, nube vs local ................ 3 min  (diap. 23-24)
+  Bloque 6  PLAN.md, diff y pruebas (DEMOS 1 y 2) .......... 7 min  (diap. 25-30)
+  Bloque 7  Spec-driven: del qmd al informe en línea ....... 2 min  (diap. 31-32)
+  Bloque 8  Tendencias: paquetes, MCP, wiki, commons ....... 2 min  (diap. 33)
+  Bloque 9  Una propuesta para la ATDEM .................... 4 min  (diap. 34-36)
+  Bloque 10 Cierre: human in the loop, preguntas, curso .... 3 min  (diap. 37-39)
 
   Desactivadas (comentadas en este archivo, no borradas): "Los síntomas",
   "Una narrativa, no una receta", "Quarto mantiene todo ordenado y auditable".
-  MCP (diap. 28) es el fusible si se va el tiempo en vivo.
+  Fusibles si falta tiempo, en este orden: diap. 33 (tendencias, solo el remate)
+  -> video de la diap. 4 solo el primer minuto -> fusionar 9 y 10.
+
+Video de la diap. 4: video/005-ejecuta-plan-3x.mp4 (1:16, sin audio), generado del
+original propio (youtube.com/watch?v=RYGyi0F3SSE, 3:49) con:
+  uvx yt-dlp ... && ffmpeg -vf "setpts=PTS/3,fps=30" -an -c:v libx264 -crf 26
+Se declara en _quarto.yml (resources: video/) para que se publique en gh-pages.
 
 Dataset de las demos: data/ClimaLab_2026-04-08_2026-08-05 (1).parquet
   172 433 filas minutales (2026-04-08 -> 2026-08-05), 10 variables:
@@ -63,14 +76,75 @@ Dataset de las demos: data/ClimaLab_2026-04-08_2026-08-05 (1).parquet
 
 Marcadores:
   DEMO EN VIVO -> caja roja punteada: qué se muestra y cuánto dura
-  QR (diap. 2) -> estas diapositivas: altamarmx.github.io/vibecoding-reproducible
+  QR (diap. 2) -> estas diapositivas: altamarmx.github.io/vibecoding-atdem
+  ★ en las notas -> propuesta para la ATDEM (P1-P8 en PLAN.md)
 
 Demos en vivo: 1 y 2 en el bloque de PLAN.md (escribir el plan; tabset diario vs
-running mean 30 días), 3 en el bloque spec-driven (tabla de temperatura promedio
-mensual → tex/). El desorden del bloque 2 se muestra solo con los listados de las
-diapositivas (reales: ~/paper_enerhabitat).
+running mean 30 días). El desorden del bloque 2 se muestra solo con los listados
+de las diapositivas (reales: ~/paper_enerhabitat).
 -->
 
+:::::: {.cards .tres}
+::: {.card}
+[1]{.num}
+
+**Chat web**
+
+[ChatGPT, Claude.ai, Gemini. Copiar y pegar código y datos; el contexto se pierde al cerrar la pestaña.<br>
+<br>
+**¿Queda registro?** No.]{.desc}
+:::
+
+::: {.card}
+[2]{.num}
+
+**App de escritorio**
+
+[Claude Desktop y similares. Proyectos, archivos y conectores: más contexto, pero el trabajo vive en la app.<br>
+<br>
+**¿Queda registro?** Parcial.]{.desc}
+:::
+
+::: {.card}
+[3]{.num}
+
+**Agente en terminal**
+
+[Claude Code (CLI). Lee, escribe y **ejecuta** en tu repositorio: corre código, ve errores, se corrige.<br>
+<br>
+**¿Queda registro?** Sí, **si hay estructura**: todo en git.]{.desc}
+:::
+::::::
+
+::: {.vs-mal style="margin-top:0.7em;"}
+**El riesgo del nivel 3: un agente *overly agentic*.** Hace **más de lo que pediste**: borra archivos ajenos a la tarea, reescribe una configuración que nunca mencionaste, "arregla" lo que no le encargaste. No es falta de capacidad: es **falta de límites**. En pruebas controladas con tareas inofensivas, los agentes de terminal se excedieron en **5–28 %** de los casos. [Qu et al., *Overeager Coding Agents*, arXiv, 2026]{.tiny}
+:::
+
+::: {.pregunta .small}
+A más autonomía, más velocidad… **y más necesidad de un contrato**.
+:::
+
+::: {.notes}
+Ubicar a la audiencia: casi todos están en el nivel 1, algunos en el 2. La charla vive en el nivel 3, y la pregunta transversal es la columna "¿queda registro?": en un gobierno, lo que no deja registro no se puede auditar. El vibe coding puede pasar en cualquier nivel; en el 3 sus efectos se multiplican porque el agente actúa solo. Overly agentic (en la literatura también "overeager"): el agente amplía el alcance por su cuenta. Qu et al. (arXiv 2605.18583, mayo de 2026) lo miden en 500 escenarios: Claude Code, Codex CLI y Gemini CLI entre 5.4 y 27.7 %; OpenHands, que pide confirmación, entre 0.2 y 4.5 %; y en Claude Code, quitar la declaración de qué está autorizado sube la tasa de 0 a 17 %. Lección: el permiso explícito y el alcance acotado funcionan. Eso es justo lo que hacen PLAN.md (qué sí), AGENTS.md (qué no) y leer el diff (verificar que no se salió). Anuncia el resto de la charla sin desarrollarlo.
+:::
+
+## Un agente siguiendo un contrato {.center}
+
+:::: {style="text-align: center;"}
+<video controls="" data-autoplay="" muted="" playsinline="" preload="auto" style="height: 500px; max-width: 100%; border-radius: 8px;">
+<source src="video/005-ejecuta-plan-3x.mp4" type="video/mp4"/>
+</video>
+
+::: {.tiny}
+Claude Code ejecutando un `PLAN.md` sección por sección, en modo automático · video acelerado **3x**, sin audio · [original en YouTube](https://www.youtube.com/watch?v=RYGyi0F3SSE)
+:::
+::::
+
+::: {.notes}
+Dejar correr el video (1:16 a 3x; el original dura 3:49). Mientras corre, narrar lo que se ve: el agente lee el plan, edita archivos, corre comandos, muestra el diff de cada cambio y pasa a la siguiente sección. No improvisa el alcance: el contrato le dice qué hacer y en qué orden, que es justo el antídoto contra el agente overly agentic de la diapositiva anterior. Remate: "esto es el nivel 3 con contrato; el resto de la charla es cómo se escribe ese contrato y cómo se revisa lo que hizo". Respaldo sin red: el video es local (video/), no depende de YouTube.
+:::
+
+## ¿Qué es el vibe coding? {.center}
 
 ::: {.pregunta .small}
 Describir en lenguaje natural lo que quieres, aceptar lo que el modelo escribe<br>
@@ -78,8 +152,7 @@ Describir en lenguaje natural lo que quieres, aceptar lo que el modelo escribe<b
 :::
 
 ::: {.notes}
-Abrir en frío con la definición operativa: primero se nombra la práctica, sin autor.
-El tuit y el currículum de quien la acuñó vienen enseguida para darle peso y acotarla.
+Abrir en frío con la definición operativa: primero se nombra la práctica, sin autor. El tuit y el currículum de quien la acuñó vienen enseguida para darle peso y acotarla.
 :::
 
 ## Febrero de 2025: el tuit
@@ -135,7 +208,7 @@ sistemas de producción y enseña desde los fundamentos. Por eso su definición 
 y por eso importa que él mismo la acotó a proyectos desechables.
 :::
 
-## Esto **no** es una manera adecuada de hacer ciencia… {.center}
+## Esto **no** es una manera adecuada de hacer ciencia… ni de sustentar política pública {.center}
 
 ::: {.pregunta .small}
 "Accept All" sin leer los diffs produce resultados que **nadie puede verificar**:<br>
@@ -152,21 +225,107 @@ y cambiar la confianza ciega por **estructura reproducible** y **verificación h
 :::
 
 ::: {.notes}
-El pivote de la charla: no desechamos el concepto, lo transformamos. Velocidad sí,
-ceguera no. El propio Karpathy lo acotó a lo desechable; la ciencia no es desechable.
-Esta frase da pie al separador que reformula la pregunta.
+El pivote de la charla: no desechamos el concepto, lo transformamos. Velocidad sí, ceguera no. El propio Karpathy lo acotó a lo desechable; ni la ciencia ni una decisión pública son desechables. Transición: y el problema de verificar resultados no lo inventó la IA; ya existía.
 :::
 
-# La pregunta ya no es **si** haría el análisis de un artículo o una tesis con IA… {.center background-color="#1f3a5f"}
+<!-- Bloque 1b · La crisis de reproducibilidad · 3 min -->
 
-::: {.pregunta}
-…sino **cómo**: ¿cómo aseguro la **reproducibilidad** y la **certeza**<br>
-de que el análisis o cálculo está bien ejecutado?
+## La crisis de reproducibilidad es anterior a la IA
+
+:::::: {.cards .tres}
+::: {.card}
+[\>70 %]{.num style="width:auto; border-radius:8px; padding:0 0.4em;"}
+
+**de 1 576 investigadores**
+
+[no logró reproducir el experimento de un colega; más de la mitad, ni el **propio**.<br>
+[Baker, *Nature*, 2016]{.tiny}]{.desc}
+:::
+
+::: {.card}
+[4 %]{.num style="width:auto; border-radius:8px; padding:0 0.4em;"}
+
+**de 1.4 M notebooks de Jupyter**
+
+[en GitHub dio el mismo resultado al re-ejecutarse; solo el **24 %** corrió sin error.<br>
+[Pimentel et al., MSR 2019]{.tiny}]{.desc}
+:::
+
+::: {.card}
+[74 %]{.num style="width:auto; border-radius:8px; padding:0 0.4em;"}
+
+**de los scripts de R**
+
+[depositados en Harvard Dataverse falló al re-ejecutarse (56 % tras limpieza automática).<br>
+[Trisovic et al., *Sci. Data*, 2022]{.tiny}]{.desc}
+:::
+::::::
+
+<br>
+
+::: {.small}
+Las causas más comunes: **dependencias sin fijar**, **estado oculto** y celdas corridas fuera de orden, **datos inaccesibles**. Ninguna es un problema de inteligencia: todas son de **estructura** y de **buenas o malas prácticas**.
 :::
 
 ::: {.notes}
-Reformular la pregunta es el giro de la charla: la adopción ya ocurrió, el problema ahora
-es de método. Todo lo que sigue —la propuesta, el plan, las pruebas— responde al "cómo".
+Tres cifras, tres escalas: personas, notebooks, repositorios de datos. Las causas que reportan Pimentel et al. (dependencias, estado oculto, orden de ejecución, datos) son exactamente lo que resuelven uv.lock, Quarto y data/001_raw/ más adelante. Mensaje: la IA no creó la crisis, pero genera código más rápido de lo que lo ordenamos; sin estructura, la acelera.
+:::
+
+## Cuando el análisis no reproducible decide
+
+::::::::: {.columns .vs-grandes}
+::::: {.column width="50%"}
+:::: {.vs-mal}
+**Reinhart y Rogoff (2010)**
+
+*Growth in a Time of Debt*: deuda \> 90 % del PIB → menor crecimiento. Citado para justificar **políticas de austeridad**.
+
+En 2013, un estudiante de doctorado (Herndon) lo reprodujo con la hoja de cálculo de los autores: un **rango mal seleccionado en Excel** omitía países, más exclusiones y ponderaciones discutibles. Con deuda \> 90 %, el crecimiento promedio no era **−0.1 %** sino **2.2 %**.
+
+::: {.tiny}
+[Reinhart y Rogoff, *AER* 100(2), 2010](https://doi.org/10.1257/aer.100.2.573) · [Herndon, Ash y Pollin, *Camb. J. Econ.* 38(2), 2014](https://doi.org/10.1093/cje/bet075)
+:::
+::::
+:::::
+
+::::: {.column width="50%"}
+:::: {.vs-mal}
+**Public Health England (2020)**
+
+**15 841 casos de COVID-19** quedaron fuera del conteo diario (25 sep – 2 oct).
+
+Los CSV de los laboratorios se cargaban en un formato de Excel con **límite de filas**: lo que no cabía se descartó **sin aviso**. El rastreo de contactos se retrasó.
+
+::: {.tiny}
+[The Register, 5 de octubre de 2020](https://www.theregister.com/2020/10/05/excel_england_coronavirus_contact_error/)
+:::
+::::
+:::::
+:::::::::
+
+<br>
+
+::: {.pregunta .small}
+En gobierno, el error no se queda en un *paper*: **llega a una decisión**.
+:::
+
+::: {.notes}
+Dos casos públicos y documentados; ninguno involucra IA. En ambos el cálculo "corría" y daba números plausibles. Lo que faltó fue un proceso que alguien externo pudiera reproducir y que hiciera obvio el error. Reinhart–Rogoff: el artículo original es una nota de 6 páginas en AER Papers & Proceedings (mayo de 2010), sin el arbitraje habitual de la revista. La crítica circuló en abril de 2013 como working paper de PERI-UMass (WP 322) y se publicó en Cambridge Journal of Economics (2014). Encontró tres problemas: error de codificación en Excel (rango que dejaba fuera a cinco países), exclusión selectiva de años y ponderación de los promedios. Reinhart y Rogoff reconocieron el error de Excel, pero sostienen que no cambia su conclusión de fondo; decirlo así es más honesto y no le quita fuerza al punto: el error solo se encontró porque alguien pidió la hoja de cálculo y la reprodujo. PHE: reportes de prensa y de PHE de octubre de 2020.
+:::
+
+# La pregunta ya no es **si** analizaré datos públicos con IA… {.center background-color="#1f3a5f"}
+
+::: {.pregunta}
+…sino **cómo**: ¿cómo aseguro la **reproducibilidad** y la **certeza**<br>
+de que el análisis o cálculo está bien ejecutado y es **auditable**?
+:::
+
+::: {style="text-align: center; margin-top: 1em;"}
+[NOTA · comentar caso UNAM, exámenes en línea: lo que salvó fueron los **datos libres** (aplausos)]{.todo}
+:::
+
+::: {.notes}
+Reformular la pregunta es el giro de la charla: la adopción ya ocurrió (según la prensa, la ATDEM ya arrancó capacitación en IA para los enlaces informáticos), el problema ahora es de método. Todo lo que sigue —la propuesta, el plan, las pruebas— responde al "cómo".
 :::
 
 <!-- Bloque 2 · El proyecto desorganizado · 4 min -->
@@ -175,18 +334,18 @@ es de método. Todo lo que sigue —la propuesta, el plan, las pruebas— respon
 
 ::: {.ls-grande}
 ```text
-$ ls proyecto_tesis/
+$ ls reporte_tramites/
 Untitled.ipynb                    analisis_final.py
 Untitled1.ipynb                   analisis_final_v2.py
 Untitled27.ipynb                  analisis_final_v3_AHORASI.py
 Sin_titulo_copia.ipynb            script_de_chatgpt.py
-datos.csv                         arreglado_con_claude_v2.py
-datos_limpios.csv                 figura1.png
-datos_limpios(2).csv              figura1_buena.png
-datos_limpios_DEFINITIVO.csv      fig_final_USAR_ESTA.png
-prueba.py                         grafica_sin_titulo (3).png
-prueba2_funciona.py               resultados_viejos/
-prueba3_no_tocar.py               resultados_viejos_2/
+padron.xlsx                       arreglado_con_claude_v2.py
+padron_limpio.csv                 grafica1.png
+padron_limpio(2).csv              grafica1_buena.png
+padron_DEFINITIVO.xlsx            grafica_final_USAR_ESTA.png
+prueba.py                         tablero_v3_USAR.pbix
+prueba2_funciona.py               reportes_viejos/
+prueba3_no_tocar.py               reportes_viejos_2/
 ```
 :::
 
@@ -195,9 +354,7 @@ Este es el nivel **evidente** del desorden. Hay otro más sutil…
 :::
 
 ::: {.notes}
-No burlarse: todos hemos tenido esta carpeta. El chiste es reconocerla.
-Con IA es peor: cada prompt genera código nuevo más rápido de lo que ordenamos el anterior.
-Transición: "y aunque uno ordene los scripts, hay un segundo nivel".
+No burlarse: todos hemos tenido esta carpeta. El chiste es reconocerla. Con IA es peor: cada prompt genera código nuevo más rápido de lo que ordenamos el anterior. Transición: "y aunque uno ordene los scripts, hay un segundo nivel".
 :::
 
 ## El nivel sutil: scripts ordenados, resultados sin narrativa
@@ -342,15 +499,16 @@ El plan, las reglas y la bitácora van a ser archivos .md dentro del repositorio
 ## ¿Qué es Quarto?
 
 ::: {.small}
-- Sistema de **publicación científica y técnica** de código abierto (Posit; sucesor de R Markdown).
+- Sistema de **publicación científica y técnica** de código abierto (Posit; sucesor de R Markdown) · [quarto.org](https://quarto.org)
 - Un `.qmd` = Markdown + bloques de código **ejecutables** (Python, R, Julia) + opciones en YAML.
 :::
 
-::: {.columns}
-::: {.column width="52%"}
+::::::: {.columns}
+:::: {.column width="52%"}
 **El fuente** (`index.qmd`)
 
-````markdown
+::: {.resalta-python}
+````{.markdown code-line-numbers="9-13"}
 ---
 title: "Análisis de mediciones"
 format: html
@@ -366,7 +524,9 @@ df.plot(x="fecha", y="flujo_l_s")
 ```
 ````
 :::
-::: {.column width="48%"}
+::::
+
+:::: {.column width="48%"}
 **Cómo se convierte**
 
 ```bash
@@ -379,38 +539,36 @@ quarto render --to revealjs  # → diapos
 **Y mientras escribes:** `quarto preview`
 
 ::: {.small}
-Deja el documento **vivo en el navegador**: cada
-vez que guardas, se re-ejecuta y refresca solo —
-escribes y **ves el resultado al instante**.
+Deja el documento **vivo en el navegador**: cada vez que guardas, se re-ejecuta y refresca solo — escribes y **ves el resultado al instante**.
 :::
-:::
-:::
+::::
+:::::::
 
 ::: {.pregunta .small}
 Estas diapositivas están hechas en Quarto — y se construyeron con `quarto preview`.
 :::
 
 ::: {.notes}
-Señalar las tres piezas en el ejemplo: YAML arriba (opciones documentadas),
-texto en Markdown con referencia cruzada, celda de Python con etiqueta y pie de figura.
+Señalar las tres piezas en el ejemplo: YAML arriba (opciones documentadas), texto en Markdown con referencia cruzada, celda de Python con etiqueta y pie de figura.
 :::
 
 ## Por qué juntos: el análisis **es** el documento {.center}
 
-::: {.columns .vs-grandes}
-::: {.column width="50%"}
+::::::: {.columns .vs-grandes}
+:::: {.column width="50%"}
 ::: {.vs-mal}
 **El flujo de siempre**
 
 1. Script que genera figuras
-2. Copiar y pegar al Word
+2. Copiar y pegar al informe o al tablero
 3. Cambian los datos…
 4. …repetir a mano y rezar
 
 Texto y código **divergen** desde el día uno.
 :::
-:::
-::: {.column width="50%"}
+::::
+
+:::: {.column width="50%"}
 ::: {.vs-bien}
 **Con Quarto**
 
@@ -420,38 +578,39 @@ Texto y código **divergen** desde el día uno.
 
 El documento no puede mentir sobre su código.
 :::
-:::
-:::
+::::
+:::::::
 
 ::: {.notes}
-Frase ancla: "el análisis ES el documento". No hay un script por un lado y un Word por el otro.
-Esto es lo que vuelve auditable el trabajo hecho con IA: todo lo que la IA escribió está a la vista.
+Frase ancla: "el análisis ES el documento". No hay un script por un lado y un Word por el otro. Esto es lo que vuelve auditable el trabajo hecho con IA: todo lo que la IA escribió está a la vista.
 :::
 
 ## ¿Qué es el versionado?
 
-::: {.columns}
+::::: {.columns}
 ::: {.column width="40%"}
-![](img/meme-versiones-tesis.png){height="460px"}
-:::
-::: {.column .small width="60%"}
-- Todos hemos versionado **a mano**: `tesis_final_por_fin_eso_espero.docx`.
-- Un **sistema de control de versiones** —**git**— guarda la historia completa del proyecto: quién cambió **qué**, **cuándo** y **por qué**. Un solo archivo, todas sus versiones.
-- Cada *commit* es un punto de retorno: equivocarse deja de ser caro, y el *diff* entre versiones siempre se puede leer.
-- **git es software libre**; yo publico mis repositorios en **GitHub**, que es gratuito para la comunidad académica ([GitHub Education](https://github.com/education)).
-:::
+![](img/meme-versiones-tesis.png){height="460"}
 :::
 
+::: {.column .small width="60%"}
+- Todos hemos versionado **a mano**: `tesis_final_por_fin_eso_espero.docx`, `informe_trimestral_final_v3.xlsx`.
+- Un **sistema de control de versiones** —**git**— guarda la historia completa del proyecto: quién cambió **qué**, **cuándo** y **por qué**. Un solo archivo, todas sus versiones.
+- Cada *commit* es un punto de retorno: equivocarse deja de ser caro, y el *diff* entre versiones siempre se puede leer.
+- **git es software libre**: se puede hospedar en un **servidor propio del Estado** (GitLab, Forgejo) y el código queda **bajo control estatal**; o en **GitHub**, donde publico estas diapositivas.
+:::
+:::::
+
 ::: {.notes}
-El meme hace el trabajo: todos reconocen esa carpeta. git reemplaza los nombres de archivo
-por una historia con autor, fecha y mensaje de cada cambio. Precisión: git (el versionador)
-es software libre; GitHub es la plataforma que lo hospeda y da colaboración + respaldo,
-gratuita para estudiantes y docentes vía GitHub Education.
+El meme hace el trabajo: todos reconocen esa carpeta. git reemplaza los nombres de archivo por una historia con autor, fecha y mensaje de cada cambio. Precisión: git (el versionador) es software libre; GitHub es una plataforma que lo hospeda, no la única. ★ ATDEM: la Ley de Transformación Digital (art. 100 IV) pide "código fuente disponible para auditoría… bajo control estatal" y (art. 100 V) privilegiar tecnologías abiertas. Un servidor git institucional cumple ambas cosas con software libre.
 :::
 
 <!-- Bloque 4 · Configuración (uv), estructura y flujo · 6 min -->
 
 ## Todo empieza por el entorno: `uv` {.center}
+
+::: {.small}
+[**uv**](https://docs.astral.sh/uv/), de **Astral**: gestor de proyectos y paquetes de Python, de código abierto y muy rápido · [docs.astral.sh/uv](https://docs.astral.sh/uv/)
+:::
 
 ::: {.ls-grande}
 ```bash
@@ -467,15 +626,14 @@ uv run quarto render               # todo corre dentro del ambiente
 - El contrato declara la herramienta: *"instala con `uv add`, ejecuta con `uv run`"* — el agente **no improvisa** un `pip install` fuera del ambiente.
 
 ::: {.notes}
-Si el agente sabe con qué instalar, no contamina el sistema ni rompe el ambiente:
-cada paquete que agrega queda fijado en uv.lock y el commit lo registra.
+Si el agente sabe con qué instalar, no contamina el sistema ni rompe el ambiente: cada paquete que agrega queda fijado en uv.lock y el commit lo registra.
 :::
 
 ## Estructura propuesta
 
 ```text
 proyecto/
-├── PLAN.md                # contrato + bitácora de IA + decisiones de la persona autora
+├── PLAN.md                # contrato + bitácora de IA + decisiones + ficha de metadatos
 ├── AGENTS.md              # reglas del espacio de trabajo para el agente
 ├── pyproject.toml         # entorno fijado con uv
 ├── uv.lock
@@ -487,23 +645,16 @@ proyecto/
 ├── tests/                 # pruebas físicas (pytest)
 ├── analysis/
 │   └── index.qmd          # la narrativa computacional del análisis
-└── tex/                   # opcional: main.tex (el artículo); recibe las figuras
-                           # y tablas .tex que index.qmd declara FINALES
+└── tex/                   # opcional: el informe o artículo; recibe las figuras
+                           # y tablas que index.qmd declara FINALES
 ```
 
 ::: {.small}
-Es una **narrativa, no una receta**: la estructura se adapta al proyecto y a sus datos. Lo que no cambia:
-crudos intocables · entorno fijado · funciones con pruebas · análisis en `.qmd`.
+Es una **narrativa, no una receta**: la estructura se adapta al proyecto y a sus datos. Lo que no cambia: crudos intocables · entorno fijado · funciones con pruebas · análisis en `.qmd`.
 :::
 
 ::: {.notes}
-Recorrer de arriba a abajo: primero los contratos (PLAN, AGENTS), luego el entorno,
-luego datos con crudos intocables y resultados en data/003_results/, funciones probadas,
-el análisis en un solo index.qmd, y tex/ con el artículo. PLAN.md concentra también
-la bitácora de IA y las decisiones: por eso no hay docs/.
-Detalle para la demo: el parquet llegó como "ClimaLab_2026-04-08_2026-08-05 (1).parquet",
-con espacio y "(1)". Moverlo a data/001_raw/ con nombre limpio es parte de la narrativa;
-su origen y fecha quedan anotados en la sección Datos del PLAN.md.
+Recorrer de arriba a abajo: primero los contratos (PLAN, AGENTS), luego el entorno, luego datos con crudos intocables y resultados en data/003_results/, funciones probadas, el análisis en un solo index.qmd, y tex/ con el artículo. PLAN.md concentra también la bitácora de IA y las decisiones: por eso no hay docs/. Detalle para la demo: el parquet llegó como "ClimaLab_2026-04-08_2026-08-05 (1).parquet", con espacio y "(1)". Moverlo a data/001_raw/ con nombre limpio es parte de la narrativa; su origen y fecha quedan anotados en la sección Datos del PLAN.md. ★ ATDEM: esa sección Datos (origen, fecha, variables, unidades) es ya una ficha de metadatos: puede alimentar el Inventario de Datos que pide el art. 122 de la Ley.
 :::
 
 <!-- DESACTIVADA (recorte de tiempo; su mensaje se movió a "Estructura propuesta"):
@@ -554,17 +705,17 @@ y cómo se convierten en el artículo. Los cuatro invariantes sí son innegociab
 :::
 -->
 
-## La fragmentación: así se publica la figura incorrecta
+## La fragmentación: así se publica la cifra incorrecta
 
 ```text
- se analiza            se genera                se manda             se agrega            se publica
-datos + código  ──►  figura_v2_FINAL.png  ──►  por correo  ──►  a mano en main.tex  ──►  el PDF
+ se analiza            se genera                 se manda             se agrega           se publica
+datos + código  ──►  grafica_v2_FINAL.png  ──►  por correo  ──►  a mano al informe  ──►  el PDF/portal
 ```
 
 ::: {.small}
-- El análisis en una compu, el manuscrito en otra, y la figura **viajando por correo**: cada flecha es un paso **manual, invisible y sin registro**.
-- Si el dato cambia después del envío, el artículo conserva la **figura vieja** — y nadie lo nota hasta que está publicado.
-- Todos tenemos la anécdota del paper con la **figura incorrecta**. No es descuido: es la fragilidad del proceso.
+- El análisis en una compu, el informe en otra, y la figura **viajando por correo**: cada flecha es un paso **manual, invisible y sin registro**.
+- Si el dato cambia después del envío, el informe conserva la **figura vieja** — y nadie lo nota hasta que está publicado.
+- Todos tenemos la anécdota del informe con la **cifra incorrecta**. No es descuido: es la fragilidad del proceso.
 :::
 
 <br>
@@ -576,11 +727,68 @@ todo comandado por `uv run quarto render`.
 :::
 
 ::: {.notes}
-Contar aquí la anécdota propia (o invitar a la audiencia a recordar la suya).
-El contraste con la estructura anterior: allá cada flecha vive en el repositorio
-y se regenera con un comando; aquí cada flecha vive en un correo y en la memoria
-de alguien. Datos, código y resultados no deben fragmentarse entre computadoras
-y personas: quien llega clona, sincroniza y reproduce.
+Contar aquí la anécdota propia (o invitar a la audiencia a recordar la suya). El contraste con la estructura anterior: allá cada flecha vive en el repositorio y se regenera con un comando; aquí cada flecha vive en un correo y en la memoria de alguien. Datos, código y resultados no deben fragmentarse entre computadoras y personas: quien llega clona, sincroniza y reproduce.
+:::
+
+## No basta con herramientas: hace falta **cultura digital**
+
+::::::::: {.cards .tres}
+::: {.card}
+[1]{.num}
+
+**Flujos de trabajo sólidos**
+
+[Un repositorio compartido, cada paso convertido en comando; nada viaja por correo.]{.desc}
+:::
+
+::: {.card}
+[2]{.num}
+
+**Buenas prácticas**
+
+[Crudos intocables, entorno fijado, pruebas, commits pequeños con mensaje claro.]{.desc}
+:::
+
+::: {.card}
+[3]{.num}
+
+**Revisión entre pares**
+
+[Nadie publica solo: otra persona lee el diff y reproduce el resultado antes de firmar.]{.desc}
+:::
+
+::: {.card}
+[4]{.num}
+
+**Documentación y metadatos**
+
+[`PLAN.md` y README: de dónde vienen los datos, qué se decidió y por qué.]{.desc}
+:::
+
+::: {.card}
+[5]{.num}
+
+**Abierto por defecto**
+
+[Datos y código libres siempre que la ley lo permita: lo que se puede revisar, se puede corregir.]{.desc}
+:::
+
+::: {.card}
+[6]{.num}
+
+**Formación continua**
+
+[Terminal, git, Python, Quarto: saber **leer** código es la condición para auditar a la IA. Y **evaluar nuevas tecnologías** antes de adoptarlas.]{.desc}
+:::
+:::::::::
+
+::: {.pregunta .small}
+La herramienta se instala en un día; la **cultura** se construye:<br>
+práctica, reglas claras y errores que se **reportan**, no se esconden.
+:::
+
+::: {.notes}
+Puente entre la parte técnica y la institucional: todo lo anterior (Markdown, Quarto, git, uv, estructura) falla si cada quien trabaja a su manera. Por eso "cultura digital" es uno de los cinco pilares del plan semestral de la ATDEM. Lo que más falta, en orden de dificultad: (1) revisión entre pares, porque obliga a que alguien más pueda reproducir; (2) reportar errores sin castigo: una prueba que falla es información, no un fracaso; (3) apertura por defecto, que convierte a la ciudadanía en revisora (enlaza con el caso UNAM: lo que salvó fueron los datos libres). Pregunta a la sala si da tiempo: "¿cuál de las seis tiene hoy su dependencia?"
 :::
 
 <!-- Bloque 5 · Agentes · 4 min -->
@@ -594,52 +802,51 @@ que itera hasta cumplir una tarea.
 :::
 
 ::: {.small}
-- A diferencia del chat, **actúa sobre tu repositorio**: crea archivos, corre código, ve los errores y se corrige.
+- Es el **nivel 3** de la escalera del inicio: a diferencia del chat, **actúa sobre tu repositorio**: crea archivos, corre código, ve los errores y se corrige.
 - Por eso necesita **reglas** (`AGENTS.md`) y un **contrato** (`PLAN.md`): sin ellos, optimiza "que no truene", no "que esté bien".
 - El ciclo: lee el plan → propone acción → ejecuta herramienta → observa el resultado → repite.
 :::
 
 ::: {.notes}
-Diferencia clave con copiar/pegar desde el chat: el agente cierra el ciclo solo.
-Eso multiplica la velocidad y también multiplica el daño si no hay reglas.
-La mención de PLAN.md anuncia el bloque que sigue: el contrato.
+Diferencia clave con copiar/pegar desde el chat: el agente cierra el ciclo solo. Eso multiplica la velocidad y también multiplica el daño si no hay reglas. La mención de PLAN.md anuncia el bloque que sigue: el contrato.
 :::
 
 ## Agentes en la nube y agentes locales {.center}
 
-::: {.columns .vs-grandes}
-::: {.column width="50%"}
+::::::: {.columns .vs-grandes}
+:::: {.column width="50%"}
 ::: {.vs-bien}
 **Nube — mi caso: Claude (Claude Code)**
 
 - Modelos de frontera, los más capaces
 - Sin hardware propio
 - Costo por uso
-- Los datos **salen de tu máquina**: considerarlo con datos sensibles
+- Los datos **salen de tu máquina**
+- **En gobierno:** datos públicos y abiertos
 :::
-:::
-::: {.column width="50%"}
+::::
+
+:::: {.column width="50%"}
 ::: {.vs-mal}
 **Local — también uso Qwen3.8 27B** (`qwen3.8:27b-mlx`)
 
 - Los datos **no salen**; sin costo por token
 - Exige **hardware capaz**: aquí corre vía **MLX** en Apple Silicon con memoria unificada amplia (o GPU con VRAM suficiente)
-- Rinde menos que los modelos de frontera
+- Rinde menos que los modelos de frontera: hay que **evaluar sus capacidades** y si es **adecuado para la tarea** antes de adoptarlo
+- **En gobierno:** datos personales y padrones, en **infraestructura del Estado**
 :::
-:::
-:::
+::::
+:::::::
 
 ::: {.notes}
-Ser honesto con la restricción local: no es gratis, se paga en hardware y en capacidad del modelo.
-La decisión es por proyecto, no ideológica. De palabra si sale en el Q&A: nube para el
-trabajo pesado; local cuando los datos no deben salir o para tareas acotadas.
+Ser honesto con la restricción local: no es gratis, se paga en hardware y en capacidad del modelo. La decisión es por tipo de dato, no ideológica: nube para el trabajo pesado con datos públicos; local cuando los datos no deben salir. ★ ATDEM: el centro de datos estatal en planeación es el lugar natural para un modelo local que atienda a las dependencias que manejan datos personales (protección de datos personales en posesión de sujetos obligados).
 :::
 
 <!-- Bloque 6 · PLAN.md, diff y pruebas · 7 min -->
 
 ## PLAN.md: el contrato con el agente
 
-::: {.columns}
+::::: {.columns}
 ::: {.column width="55%"}
 ```markdown
 # PLAN · Clima ClimaLab (abr–ago 2026)
@@ -656,6 +863,8 @@ ws [m/s] · wd [°] · p_atm · rain_acc
 
 ## Herramientas
 Instalar con `uv add`, correr con `uv run`.
+Tras cada cambio de código: mostrar
+el `git diff` y esperar revisión.
 
 ## Pasos
 1. Validar crudos con pruebas físicas
@@ -671,19 +880,19 @@ Qué propuso la IA, qué decidió
 la persona autora, y por qué.
 ```
 :::
-::: {.column width="45%" .small}
+
+::: {.column .small width="45%"}
 - Se escribe **antes** de pedir una sola línea de código.
 - Dice **qué** quieres de los datos: preguntas, variables, **unidades**, supuestos.
-- Y **con qué**: la sección de herramientas le dice al agente cómo instalar y ejecutar.
+- Y **con qué**: la sección de herramientas le dice al agente cómo instalar, ejecutar y **mostrar el diff** de cada cambio.
 - `git commit` del plan = **firma del contrato**.
 - Cada sección es una unidad de trabajo para el agente.
 - Es también la **bitácora**: las decisiones de la persona autora quedan en el repo, no en la memoria.
 :::
-:::
+:::::
 
 ::: {.notes}
-El corazón de la charla empieza aquí. El plan no es burocracia: es lo que convierte
-"hazme el análisis" en una secuencia de encargos verificables.
+El corazón de la charla empieza aquí. El plan no es burocracia: es lo que convierte "hazme el análisis" en una secuencia de encargos verificables.
 :::
 
 ## Cómo se escribe: el LLM propone, el humano corrige
@@ -778,9 +987,9 @@ Cada vuelta es pequeña: si algo sale mal, el diff es corto. Lo contrario de "Ac
 Respaldo por si falla la red/el agente: captura del render ya hecho.
 :::
 
-## ¿Qué es una prueba? Una respuesta conocida de antemano
+## Data testing: una respuesta conocida de antemano
 
-::: {.columns}
+::::: {.columns}
 ::: {.column width="44%"}
 **La función** (escrita por el agente)
 
@@ -795,6 +1004,7 @@ def calcular_energia(potencia_w, freq="1h"):
     return (potencia_w * dt_h).resample(freq).sum()
 ```
 :::
+
 ::: {.column width="56%"}
 **La prueba** (datos inventados por la persona autora)
 
@@ -813,7 +1023,7 @@ def test_energia_con_respuesta_conocida():
     assert energia.sum() == 2400.0
 ```
 :::
-:::
+:::::
 
 ::: {.small}
 - La persona autora **inventa datos cuya respuesta conoce sin correr el código**: potencia constante → la energía se calcula con papel y lápiz.
@@ -822,16 +1032,13 @@ def test_energia_con_respuesta_conocida():
 :::
 
 ::: {.notes}
-El ejemplo más claro del concepto: el ground truth lo pone la persona, no el código.
-Señalar la frecuencia del resample como parámetro: la misma prueba se puede repetir
-con freq="15min" (300 Wh por cuarto de hora). Verificado: estos asserts pasan tal cual.
+El ejemplo más claro del concepto: el ground truth lo pone la persona, no el código. Señalar la frecuencia del resample como parámetro: la misma prueba se puede repetir con freq="15min" (300 Wh por cuarto de hora). Verificado: estos asserts pasan tal cual.
 :::
 
 ## Las pruebas son parte del plan
 
 ::: {.small}
-Cada afirmación verificable del plan se convierte en una **prueba física** con pytest.
-Estas tres corren sobre los datos reales de ClimaLab, con el resultado real:
+Cada afirmación verificable del plan se convierte en una **prueba física** con pytest. Estas tres corren sobre los datos reales de ClimaLab, con el resultado real:
 :::
 
 ```python
@@ -852,19 +1059,19 @@ def test_serie_completa():            # FALLA: hay 2 huecos > 1 min
 - La prueba que **falla** no es un fracaso: obliga a decidir (¿interpolar?, ¿dejar el hueco?) y a **documentar la decisión**.
 - Las pruebas **físicas** detectan lo imposible; la **referencia externa** detecta lo plausible pero incorrecto.
 - Ojo con las pruebas tautológicas que proponen los LLM: prueban que el código hace lo que el código hace.
+- Es lo que la ley llama datos **"ciertos, consistentes, íntegros"** (art. 121), convertido en código.
 :::
 
 ::: {.notes}
-Aquí entra el "pruebas" del título. No son pruebas de software por cumplir:
-son las afirmaciones del plan convertidas en código que vigila al agente.
+Aquí entra el "pruebas" del título. No son pruebas de software por cumplir: son las afirmaciones del plan convertidas en código que vigila al agente. ★ ATDEM: el art. 121 II de la Ley de Transformación Digital enumera atributos de calidad de datos; cada uno se puede volver una prueba que corre en cada render.
 :::
 
 <!-- Bloque 7 · Spec-driven · 5 min -->
 
 ## Esto ya tiene nombre: *spec-driven development* {.center}
 
-::: {.columns .vs-grandes}
-::: {.column width="50%"}
+::::::: {.columns .vs-grandes}
+:::: {.column width="50%"}
 ::: {.vs-mal}
 **Vibe coding (Karpathy)**
 
@@ -873,26 +1080,26 @@ son las afirmaciones del plan convertidas en código que vigila al agente.
 - "Accept All"
 - Para proyectos **desechables**
 :::
-:::
-::: {.column width="50%"}
+::::
+
+:::: {.column width="50%"}
 ::: {.vs-bien}
 **Spec-driven (lo que acabamos de hacer)**
 
 - `PLAN.md` **firmado** es la especificación
 - El agente ejecuta el spec; el humano lo escribe y lo **verifica**
 - Diff leído, pruebas pasando, commit
-- Para trabajo que **se publica**
+- Para trabajo que **se publica** o **sustenta una decisión pública**
 :::
-:::
-:::
+::::
+:::::::
 
 ::: {.notes}
-Nombrar lo que ya hicimos en el bloque anterior: no inventamos nada,
-es la misma transición que está dando la industria del software con los agentes.
+Nombrar lo que ya hicimos en el bloque anterior: no inventamos nada, es la misma transición que está dando la industria del software con los agentes.
 :::
 
 <!-- DESACTIVADA (recorte de tiempo; el punto de las opciones de celda se dice
-de palabra en la Demo 3: "cada opción queda escrita y versionada"):
+de palabra en "Del .qmd al informe en línea": "cada opción queda escrita y versionada"):
 ## Quarto mantiene todo ordenado y auditable
 
 ::: {.small}
@@ -902,7 +1109,7 @@ de palabra en la Demo 3: "cada opción queda escrita y versionada"):
 :::
 
 ````markdown
-```{{python}}
+```potluoogjf
 #| label: fig-serie
 #| fig-cap: "Flujo medido vs. modelo"
 #| echo: true          # el código se muestra: auditable
@@ -921,98 +1128,184 @@ No hay celdas ocultas ni estados de notebook fuera de orden.
 :::
 -->
 
-## Del `.qmd` a la versión final del artículo
+## Del `.qmd` al informe en línea y al portal de datos abiertos
 
 ::: {.small}
-- El artículo vive en `tex/main.tex`; cuando una figura o tabla se **declara final**, `index.qmd` la guarda en `tex/`.
-- Nada se copia a mano: el artículo **importa** lo que el análisis produce:
+- El informe **es** el `.qmd`: Quarto lo convierte a **HTML** y lo **publica en línea**. No hay documento aparte al que copiar figuras.
+- La misma corrida escribe el `.csv` para el **Portal de Datos Abiertos**: informe y datos salen del mismo código.
 :::
 
-::: {.columns}
-::: {.column width="52%"}
-```python
-# en analysis/index.qmd,
-# al declarar la figura/tabla FINAL
-(tabla_resumen
-   .style.format(precision=2)
-   .to_latex("../tex/tabla_resultados.tex"))
+:::::: {.columns}
+::: {.column width="55%"}
+**En `analysis/index.qmd`**
 
-fig.savefig("../tex/fig03_comparacion.png", dpi=300)
+````markdown
+```{{python}}
+#| label: tbl-temp-mensual
+#| tbl-cap: "Temperatura promedio mensual [°C]"
+mensual = tdb.resample("MS").mean()
+mensual.to_csv("data/003_results/temp_mensual.csv")
+mensual.to_frame()
 ```
+````
 :::
-::: {.column width="48%"}
-```latex
-% en tex/main.tex (el artículo)
-\begin{table}
-  \input{tabla_resultados.tex}
-  \caption{Resumen de resultados.}
-\end{table}
 
-\includegraphics{fig03_comparacion.png}
+:::: {.column width="45%"}
+**Y para publicarlo**
+
+```bash
+uv run quarto render            # → informe HTML
+uv run quarto publish gh-pages  # → en línea, con URL
 ```
-:::
-:::
 
 ::: {.small}
-El `.qmd` queda como **suplemento reproducible**: el revisor regenera todo con
-`uv sync --locked && uv run quarto render`.
+O en un **servidor del Estado**: el HTML es un sitio estático. Cada versión publicada sale de un **commit**: siempre se sabe qué código produjo qué cifra. Estas diapositivas se publican igual.
 :::
+::::
+::::::
 
-::: {.demo}
-[Demo en vivo 3 · ≤ 2 min]{.demo-title}
-Con el agente: generar la tabla de **temperatura promedio mensual** de ClimaLab,
-declararla final y mandarla como `.tex` al folder `tex/`, lista para el `\input{}` de `main.tex`.
+::: {.small}
+Quien audita regenera todo con `uv sync --locked && uv run quarto render`.
 :::
 
 ::: {.notes}
-La personalización final del artículo (formato de revista) no rompe la reproducibilidad:
-las tablas y figuras siguen naciendo del qmd, el manuscrito solo las importa.
-La demo cierra el ciclo completo: dato crudo → análisis → tabla declarada final → artículo.
+El salto respecto al flujo de siempre: el informe ya no es un Word o PDF que circula por correo, es una página con URL, versionada y regenerable. La tabla del informe y el CSV del portal salen de la misma celda: no pueden contradecirse. Si alguien pide Word para el oficio: `quarto render --to docx` desde el mismo .qmd; se dice de palabra solo si preguntan. Cierra el ciclo completo: dato crudo → análisis → tabla → informe HTML + CSV.
 :::
 
-<!-- Bloque 8 · Paquetes y MCP · 3 min -->
+<!-- Bloque 8 · Tendencias actuales y a futuro · 2 min -->
 
-## Cuando `src/` crece: conviértelo en paquete
+## Tendencias actuales y a futuro
 
-::: {.small}
-Si acumulas muchas funciones que reutilizas entre proyectos, el siguiente paso natural es un
-**paquete instalable**: documentado, versionado, **citable**.
+::::::: {.cards}
+::: {.card}
+[1]{.num}
+
+**Paquetes instalables** · [EnerHabitat en PyPI](https://pypi.org/project/enerhabitat/) (`uv add enerhabitat`)
+
+[Cuando `src/` crece, se vuelve paquete: documentado, versionado, **citable**. En gobierno: bibliotecas compartidas entre dependencias, una sola función probada y no veinte copias (art. 100 V).]{.desc}
 :::
+
+::: {.card}
+[2]{.num}
+
+**Herramientas para agentes** · [MCP](https://modelcontextprotocol.io)
+
+[Estándar abierto para exponer funciones y datos como **herramientas que cualquier agente invoca**: deja de *reescribir* tus cálculos y pasa a **llamarlos**. Ejemplo: el Inventario de Datos como servidor MCP.]{.desc}
+:::
+
+::: {.card}
+[3]{.num}
+
+**Bases de conocimiento** · [LLM Wiki, Karpathy](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f)
+
+[Fuentes intocables en `raw/` (la ley, lineamientos) → wiki en Markdown que el LLM escribe **con citas** → reglas en `AGENTS.md`, todo en **git**.]{.desc}
+:::
+
+::: {.card}
+[4]{.num}
+
+**Agentes de análisis confiables** · [commons, Posit](https://posit-dev.github.io/commons/)
+
+[Usa primero **tu código validado**; cada respuesta lleva una etiqueta según su respaldo: 🟢 función validada · 🔵 contexto citado · 🟡 sin respaldo.]{.desc}
+:::
+:::::::
 
 ::: {.pregunta .small}
-Caso en casa: [**EnerHabitat** en PyPI](https://pypi.org/project/enerhabitat/)
-
-`uv add enerhabitat`
-:::
-
-::: {.small}
-- De scripts de investigación a herramienta que cualquiera instala.
-- Las versiones quedan fijadas en el `uv.lock` de quien la usa: tu ciencia se vuelve **dependencia reproducible** de la de otros.
+La misma dirección: código y conocimiento **verificados** que el agente usa en vez de improvisar.
 :::
 
 ::: {.notes}
-EnerHabitat: simulación de la transferencia de calor en envolventes, IER-UNAM.
-El mensaje no es "publiquen paquetes": es que la estructura de este flujo (src/ + tests/)
-deja el paquete casi listo.
+Paquetes: EnerHabitat, simulación de la transferencia de calor en envolventes, IER-UNAM. El mensaje no es "publiquen paquetes": la estructura de este flujo (src/ + tests/) deja el paquete casi listo, y sus versiones quedan fijadas en el uv.lock de quien lo usa. Orden de la diapositiva: de lo que ya existe y se usa (paquetes, MCP) a lo emergente (LLM Wiki, commons). commons (Posit): paquete de R y Python para "trustworthy data analysis agents"; corre sobre ellmer/chatlas/shinychat con cualquier proveedor de modelos. La versión de Python está en beta. Enlaza directo con lo de hoy: src/ con funciones probadas es exactamente el "código confiable" que commons pone primero, y la etiqueta amarilla es la versión automática de "no lo publiques sin prueba". MCP: modelcontextprotocol.io. Cierra el arco de Karpathy: la charla abrió con el Karpathy del vibe coding desechable y aquí aparece el Karpathy que estructura el conocimiento en Markdown versionado. Matiz honesto: la wiki la escribe el LLM, y los errores se acumulan si nadie la revisa; cada página cita su fuente cruda y la revisión entra por el diff, igual que el código. Es reproducibilidad del conocimiento, no del análisis: por eso va a futuro. ★ ATDEM: wiki de la normativa (Ley de Transformación Digital, lineamientos, plan semestral) para que los Agentes de Transformación Digital consulten con cita al artículo. Ejemplo vivo: el plan de esta charla salió de bajar la ley, pasarla a texto y citarla por artículo. Fusible: si falta tiempo, se dice solo el remate de abajo en 30 segundos.
 :::
 
-## Recomendación a futuro: MCP
+<!-- Bloque 9 · Una propuesta para la ATDEM · 4 min -->
 
-::: {.small}
-**MCP (Model Context Protocol)**: estándar abierto para exponer tus funciones y datos como
-**herramientas que cualquier agente puede invocar** directamente.
+# Una propuesta para la ATDEM {.center background-color="#1f3a5f"}
+
+::: {.pregunta}
+La Ley de Transformación Digital **ya lo pide**;<br>
+este flujo es **una forma de cumplirlo**.
 :::
-
-- Tiene sentido cuando tu código **ya es biblioteca**: muchas funciones probadas, quizá un paquete.
-- El agente deja de *reescribir* tus cálculos y pasa a **llamarlos**: menos código nuevo que auditar.
-- Es recomendación a futuro, **no requisito** del flujo de hoy.
 
 ::: {.notes}
-Un minuto, sin demo. La idea que debe quedar: la trayectoria natural es
-funciones → paquete → herramientas MCP, y cada paso reduce lo que el agente improvisa.
+Cambio de registro: de la técnica a la institución. No se vende algo nuevo: se aterriza lo que la ley (POEM 6475, 3 de octubre de 2025) ya le encarga a la Agencia.
 :::
 
-<!-- Bloque 9 · Cierre · 2 min -->
+## Lo que la ley ya pide, y dónde vive en este flujo
+
+::::::: {.columns .vs-grandes}
+:::: {.column width="50%"}
+::: {.vs-ley}
+**Ley de Transformación Digital del Estado de Morelos**
+
+- **Art. 100 IV** · código fuente disponible para auditoría
+- **Art. 101** · auditorías periódicas, incluida la documentación
+- **Art. 121** · datos ciertos, consistentes, comparables, íntegros
+- **Art. 122** · Inventario de Datos con metadatos
+- **Art. 17 LIX** · uso ético, seguro y responsable de la IA
+- **Art. 120 II** · capacitar en datos a los Agentes de TD
+:::
+::::
+
+:::: {.column width="50%"}
+::: {.vs-bien}
+**En este flujo**
+
+- Repositorio git + **diff** de cada cambio
+- `git log` + `PLAN.md` como bitácora + **pruebas**
+- **Pruebas físicas** que corren en cada render
+- Sección **Datos** del `PLAN.md` = ficha de metadatos
+- `AGENTS.md` + **humano que firma** cada commit
+- Formación práctica: de la terminal al informe
+:::
+::::
+:::::::
+
+::: {.notes}
+Leer de izquierda a derecha, renglón por renglón: cada atribución tiene un artefacto concreto que la cumple. Los artículos están verificados contra el texto de la ley (versión SCJN). El art. 17 XLV además dice que ningún proyecto digital arranca sin aprobación de la Agencia: el PLAN.md es un buen formato para esa solicitud.
+:::
+
+## Propuesta en cuatro piezas
+
+::::::: {.cards}
+::: {.card}
+[1]{.num}
+
+**Lineamiento de análisis reproducible**
+
+[Todo producto analítico que se publique o sustente una decisión vive en un repositorio con `PLAN.md`, `uv.lock`, pruebas y un `.qmd` que lo regenera.]{.desc}
+:::
+
+::: {.card}
+[2]{.num}
+
+**`AGENTS.md` institucional**
+
+[Reglas comunes para todo agente de IA en repositorios del Estado: qué datos no salen, con qué se instala, qué no se toca.]{.desc}
+:::
+
+::: {.card}
+[3]{.num}
+
+**Nube o local según el dato**
+
+[Datos públicos → modelos en la nube. Datos personales y padrones → modelo local en el **centro de datos estatal**.]{.desc}
+:::
+
+::: {.card}
+[4]{.num}
+
+**Piloto de 90 días**
+
+[Un Agente de Transformación Digital lleva un conjunto de datos de **digital.morelos** de crudo a portal con este flujo; opcional: la wiki de la normativa.]{.desc}
+:::
+:::::::
+
+::: {.notes}
+Las cuatro piezas son baratas: software libre y lineamientos. Lo caro (hardware para modelo local) se monta sobre el centro de datos que ya está en planeación. El piloto es la prueba de concepto: un conjunto de datos, una persona, 90 días, y al final cualquiera lo regenera con uv sync –locked && uv run quarto render. La formación (pieza 5, implícita) va en la última diapositiva.
+:::
+
+<!-- Bloque 10 · Cierre · 3 min -->
 
 ## Saber programar es la licencia de conducir
 
@@ -1058,7 +1351,7 @@ Cerrar el arco: del vibe coding (código sin leer) a la ciencia reproducible
 [¿Preguntas?]{style="display:block; font-size:2.2em; font-weight:700; color:#1f3a5f; text-align:center; margin-bottom:0.4em;"}
 
 ::: {.pregunta .small}
-Y una para ti: ¿qué parte de tu próximo análisis **no** delegarías, y por qué?
+Y una para ti: ¿qué dato de tu dependencia **no** publicarías sin una prueba, y por qué?
 :::
 
 <br>
@@ -1066,53 +1359,43 @@ Y una para ti: ¿qué parte de tu próximo análisis **no** delegarías, y por q
 ::: {.small style="text-align: center;"}
 Guillermo Barrios del Valle · gbv@ier.unam.mx · Instituto de Energías Renovables, UNAM
 
-Diapositivas y repositorio: [altamarmx.github.io/vibecoding-reproducible](https://altamarmx.github.io/vibecoding-reproducible/) · [github.com/AltamarMx/vibecoding-reproducible](https://github.com/AltamarMx/vibecoding-reproducible)
+Diapositivas y repositorio: [altamarmx.github.io/vibecoding-atdem](https://altamarmx.github.io/vibecoding-atdem/) · [github.com/AltamarMx/vibecoding-atdem](https://github.com/AltamarMx/vibecoding-atdem)
 :::
 
 ::: {.notes}
-Dejar en pantalla durante el Q&A.
-Preguntas sembradas para quien modera, en este orden:
-1. Datos sensibles: "¿Se pueden usar estos agentes cuando los datos no pueden salir
-   de la institución?" (→ diapositiva nube vs local, Qwen/MLX).
-2. Autoría: "Si el agente escribió el código y tú lo revisaste, ¿quién es el autor?
-   ¿Hay que declararlo a la revista?" (→ bitácora en PLAN.md; la persona firma;
-   revisar política de IA de la revista).
-3. Verificación: "Si el agente escribe el código Y las pruebas, ¿quién vigila al
-   vigilante?" (→ pruebas tautológicas; ground truth de la persona autora;
-   diff + pruebas = redundancia deliberada).
-4. Formación: "¿No les atrofia el aprendizaje a los estudiantes?" (→ leer diffs es
-   leer código experto a diario; lo que atrofia es "Accept All"; licencia de conducir).
+Dejar en pantalla durante el Q&A. Preguntas sembradas para quien modera, en este orden: 1. Datos personales: "¿Podemos usar agentes con los datos de los padrones?" (→ diapositiva nube vs local; modelo local en el centro de datos estatal). 2. Auditoría: "Si el agente escribió el código, ¿quién responde y cómo se audita?" (→ la persona firma el commit; diff + pruebas + git log; art. 101). 3. Costo: "¿Esto requiere comprar licencias?" (→ git, Quarto, Python y uv son software libre; el costo es el modelo en la nube o el hardware local). 4. Verificación: "Si el agente escribe el código Y las pruebas, ¿quién vigila al vigilante?" (→ pruebas tautológicas; la respuesta conocida la pone la persona; diff + pruebas = redundancia deliberada). 5. Formación: "¿Cómo se conecta con la capacitación en IA que ya está en marcha?" (→ diapositiva siguiente).
 :::
 
-## ¿Y si esto fuera un curso?
+## Formación para Agentes de Transformación Digital
 
 ::: {.pregunta .small}
-**De la terminal al artículo:<br>ciencia reproducible con Python, Quarto y agentes de IA**
+**De la terminal al informe:<br>
+ciencia de datos reproducible con Python, Quarto y agentes de IA**
 :::
 
-::: {.columns .small}
+::::: {.columns .small}
 ::: {.column width="50%"}
 1. **Conoce tu computadora** y la terminal
 2. **Python mínimo** con `uv`: instalación y ambientes virtuales
 3. **git básico**: commit, diff, GitHub
 4. **Quarto**: de Markdown al reporte ejecutable
 :::
+
 ::: {.column width="50%"}
 5. **Estructura del proyecto**: `PLAN.md` y `AGENTS.md`
 6. **Agentes de IA**: harness en la nube (Claude Code) y local (Qwen vía MLX)
 7. **Pruebas**: pytest, respuesta conocida, pruebas físicas
-8. **Proyecto integrador**: de tus datos al reporte reproducible
+8. **Proyecto integrador**: un conjunto de datos de tu dependencia, de crudo a portal
 :::
-:::
+:::::
 
 <br>
 
 ::: {.small style="text-align: center;"}
-¿Te interesaría? Escribe a la Unidad de Educación Continua: uec@ier.unam.mx
+El paso práctico después de la capacitación introductoria en IA (pilar *cultura digital*; art. 120 II).<br>
+Contacto: Unidad de Educación Continua, IER-UNAM · uec@ier.unam.mx
 :::
 
 ::: {.notes}
-Cierre con anzuelo: medir interés en la sala. Cada módulo del temario corresponde a un
-bloque de esta charla — el curso es la versión manos-en-el-teclado del webinar,
-partiendo de cero (instalar Python, usar la terminal) hasta el artículo reproducible.
+Cierre con propuesta concreta: cada módulo del temario corresponde a un bloque de esta charla — el curso es la versión manos-en-el-teclado, partiendo de cero (instalar Python, usar la terminal) hasta el informe reproducible. El proyecto integrador puede ser el piloto de 90 días. Mencionar la capacitación vía Anthropic Academy solo si se confirmó (fuente única: La Crónica de Morelos, 6 de agosto de 2026).
 :::

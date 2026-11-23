@@ -177,6 +177,56 @@ $code-block-font-size: 0.55em;
 .reveal .vs-mal  { background: #fdf3f1; border-top: 4px solid $rojo; }
 .reveal .vs-bien { background: #eef7f0; border-top: 4px solid #2e7d32; }
 
+/* Código con líneas resaltadas: sin números de línea, resaltado en verde */
+.reveal .resalta-python {
+  pre.numberSource {
+    margin-left: 0;
+    padding-left: 0;
+    padding-bottom: 0.5em;
+    border-left: none;
+  }
+
+  pre.numberSource code {
+    padding-left: 0;
+    line-height: 1.25;
+  }
+
+  pre.numberSource code > span {
+    left: 0;
+    margin-left: 0;
+    padding-left: 0.4em;
+    box-sizing: border-box;
+  }
+
+  pre.numberSource code > span > a:first-child::before {
+    display: none;
+  }
+
+  code.has-line-highlights > span:not(.highlight-line) {
+    opacity: 1 !important;
+  }
+
+  code.has-line-highlights > span.highlight-line {
+    display: inline-block;
+    width: 100%;
+    vertical-align: top;
+    background: #e6f4ea;
+  }
+}
+
+/* Caja neutra para el marco legal */
+.reveal .vs-ley {
+  border-radius: 10px;
+  padding: 0.5em 0.7em;
+  font-size: 0.62em;
+  background: #f4f6f9;
+  border-top: 4px solid $azul;
+}
+
+.reveal .vs-grandes .vs-ley {
+  font-size: 0.82em;
+}
+
 .reveal pre code,
 .reveal div.sourceCode pre code {
   max-height: 620px;
