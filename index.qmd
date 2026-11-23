@@ -294,7 +294,7 @@ antes del primer ##, revealjs crea una diapositiva en blanco con él.
 VERSIÓN ATDEM (Agencia de Transformación Digital del Estado de Morelos).
 Plan de la adaptación: PLAN.md (el del webinar original: PLAN_webinar.md)
 
-GUION DE 45 MINUTOS (43.5 + 1.5 de colchón; la encuesta previa, +2 min, se come el colchón)
+GUION DE 45 MINUTOS (43.5 + 1.5 de colchón; la encuesta previa (+2 min) y el caso UNAM (+1 min) exceden el colchón por 1.5 min)
   Diap. 2   QR de las diapositivas (mientras la gente llega)
   Bloque 0a Encuesta previa: quiénes respondieron ........ 2 min  (diap. 3-5)
   Bloque 0  Niveles de uso de IA + video del agente (3x) ... 3.5 min (diap. 6-7)
@@ -307,14 +307,15 @@ GUION DE 45 MINUTOS (43.5 + 1.5 de colchón; la encuesta previa, +2 min, se come
             cultura digital ............................... 5 min  (diap. 22-25)
   Bloque 5  Agentes: qué son, nube vs local ................ 3 min  (diap. 26-27)
   Bloque 6  PLAN.md, diff y pruebas (DEMOS 1 y 2) .......... 7 min  (diap. 28-33)
-  Bloque 7  Spec-driven: del qmd al informe en línea ....... 2 min  (diap. 34-35)
-  Bloque 8  Tendencias: paquetes, MCP, wiki, commons, SDV .. 2 min  (diap. 36)
-  Bloque 9  Una propuesta para la ATDEM .................... 4 min  (diap. 37-39)
-  Bloque 10 Cierre: human in the loop, preguntas, curso .... 3 min  (diap. 40-42)
+  Bloque 7  Spec-driven: del qmd al informe en línea,
+            datos abiertos (caso UNAM) .................... 3 min  (diap. 34-36)
+  Bloque 8  Tendencias: paquetes, MCP, wiki, commons, SDV .. 2 min  (diap. 37)
+  Bloque 9  Una propuesta para la ATDEM .................... 4 min  (diap. 38-40)
+  Bloque 10 Cierre: human in the loop, preguntas, curso .... 3 min  (diap. 41-43)
 
   Desactivadas (comentadas en este archivo, no borradas): "Los síntomas",
   "Una narrativa, no una receta", "Quarto mantiene todo ordenado y auditable".
-  Fusibles si falta tiempo, en este orden: diap. 36 (tendencias, solo el remate)
+  Fusibles si falta tiempo, en este orden: diap. 37 (tendencias, solo el remate)
   -> video de la diap. 7 solo el primer minuto
   -> encuesta: solo la diap. 3 y las cifras de las otras de palabra
   -> fusionar 12 y 13.
@@ -409,8 +410,8 @@ Describir en lenguaje natural lo que quieres, aceptar lo que el modelo escribe<b
 
 <br>
 
-::: {.small}
-**No es…** *"hazme un programa que haga un análisis de este archivo".*
+::: {.callout-important title="No es…"}
+*"Hazme un programa que haga un análisis de este archivo".*
 :::
 
 ::: {.notes}
@@ -1435,6 +1436,32 @@ Quien audita regenera todo con `uv sync --locked && uv run quarto render`.
 
 ::: {.notes}
 El salto respecto al flujo de siempre: el informe ya no es un Word o PDF que circula por correo, es una página con URL, versionada y regenerable. La tabla del informe y el CSV del portal salen de la misma celda: no pueden contradecirse. Si alguien pide Word para el oficio: `quarto render --to docx` desde el mismo .qmd; se dice de palabra solo si preguntan. Cierra el ciclo completo: dato crudo → análisis → tabla → informe HTML + CSV.
+:::
+
+## Datos abiertos: otros ojos ven lo que tú no
+
+::: {.columns}
+::: {.column width="60%"}
+![](img/unam-aciertos-medicina-2025-2026.jpeg){width="100%"}
+
+::: {.tiny}
+Distribución de aciertos para Medicina en CU, 2025 vs 2026. Gráfica: Luis Ángel Maciel Barón, publicada en [Milenio](https://www.milenio.com/comunidad/irregularidades-examen-unam-2026-estadisticas-sobre-aciertos) (28 de julio de 2026).
+:::
+:::
+::: {.column .small width="40%"}
+- 2026: primer examen de admisión a la UNAM **en línea**.
+- Con los resultados **publicados**, personas **ajenas a la UNAM** compararon la distribución de aciertos con la de años anteriores.
+- Medicina CU: puntajes de 100 o más pasaron de **8.9&nbsp;%** a **29&nbsp;%**.
+- La UNAM confirmó irregularidades, **anuló cerca del 2&nbsp;%** de los exámenes y presentó una denuncia; las causas siguen en revisión.
+:::
+:::
+
+::: {.pregunta .small}
+Publicar los datos no es exponerse: es **sumar revisores**.
+:::
+
+::: {.notes}
+Encuadre: no es "la UNAM falló", es "los datos estaban publicados y por eso alguien pudo verlo". Los resultados de la DGAE son públicos; con ellos, analistas externos (Helios en X, Luis Ángel Maciel Barón) compararon contra 2021-2025: el promedio de Médico Cirujano en CU habría pasado de 59-62 a 78 aciertos; Derecho y Arquitectura también subieron (Publimetro, Xataka, Milenio, julio de 2026). La UNAM confirmó irregularidades (suplantación de identidad), anuló cerca del 2 % de unos 158 mil exámenes, presentó denuncia y el rector ordenó un informe (Expansión, 31 jul 2026; Milenio). Matiz honesto, y es parte de la lección: la distribución sola no prueba fraude; el propio analista lo dijo (menos ansiedad, condiciones en casa, dificultad distinta). Separar el patrón de la causa: el dato abierto abre la pregunta; la conclusión exige análisis completo y reproducible. ★ ATDEM: el Portal de Datos Abiertos no es solo cumplimiento; es verificación externa gratuita. Verificar si ya se publicaron las conclusiones de la comisión técnica antes de la charla.
 :::
 
 <!-- Bloque 8 · Tendencias actuales y a futuro · 2 min -->
